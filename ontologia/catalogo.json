@@ -1,0 +1,47 @@
+{
+  "version": "0.1.0",
+  "descripcion": "Catálogo de tipos de problema. Cada nodo define slots, señales lingüísticas y la plantilla de resolución.",
+  "equivalencias_cotidianas": [
+    { "patron": "cuatro de cada diez", "valor": 0.4, "simbolo": "p" },
+    { "patron": "tres de cada cuatro", "valor": 0.75, "simbolo": "p" },
+    { "patron": "uno de cada cinco", "valor": 0.2, "simbolo": "p" }
+  ],
+  "problemas": [
+    {
+      "id": "ic_media",
+      "tema": "Intervalo de confianza para la media",
+      "tarea": "intervalo",
+      "parametro": "mu",
+      "senales": ["intervalo de confianza", "estime", "estimar", "nivel de confianza", "límites de confianza"],
+      "slots": {
+        "requeridos": ["n", "xbar", "confianza"],
+        "alternos": [["sigma"], ["s"]]
+      },
+      "distribucion": { "sigma conocida": "z", "sigma desconocida": "t" },
+      "estado": "pendiente"
+    },
+    {
+      "id": "ph_media",
+      "tema": "Prueba de hipótesis para la media",
+      "tarea": "prueba",
+      "parametro": "mu",
+      "senales": ["hay evidencia", "pruebe", "contraste", "nivel de significancia", "significancia", "hipótesis", "afirma", "sostiene"],
+      "slots": {
+        "requeridos": ["n", "xbar", "mu0", "alfa"],
+        "alternos": [["sigma"], ["s"]]
+      },
+      "distribucion": { "sigma conocida": "z", "sigma desconocida": "t" },
+      "estado": "pendiente"
+    }
+  ],
+  "simbolos": {
+    "n": "tamaño de muestra",
+    "xbar": "media muestral (x̄)",
+    "mu0": "media hipotética (μ₀)",
+    "sigma": "desviación estándar poblacional (σ)",
+    "s": "desviación estándar muestral (s)",
+    "alfa": "nivel de significancia (α)",
+    "confianza": "nivel de confianza (1−α)",
+    "p": "proporción"
+  }
+}

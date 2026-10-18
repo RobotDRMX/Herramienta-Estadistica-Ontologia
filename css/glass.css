@@ -1,0 +1,52 @@
+/* Componentes base "glass" reutilizables */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(var(--sat));
+  backdrop-filter: blur(var(--blur)) saturate(var(--sat));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--r-lg);
+}
+.glass--strong { background: var(--glass-bg-strong); }
+
+/* Respaldo si el navegador no soporta backdrop-filter */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: var(--glass-bg-strong); }
+}
+
+.btn {
+  font: inherit; color: var(--text); cursor: pointer;
+  padding: 10px 18px; border-radius: var(--r-pill);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  transition: transform .25s var(--ease), background .25s var(--ease);
+}
+.btn:hover { background: var(--glass-bg-strong); }
+.btn:active { transform: scale(0.96); }
+.btn--primary { background: var(--accent); color: #fff; border-color: transparent; }
+.btn--primary:hover { background: color-mix(in srgb, var(--accent) 88%, white); }
+.btn--icon { width: 40px; height: 40px; padding: 0; place-items: center; font-size: 18px; }
+
+/* Control segmentado estilo iOS */
+.segmented {
+  display: inline-flex; padding: 3px; gap: 2px; position: relative;
+  border-radius: var(--r-pill);
+  background: rgba(120, 120, 128, 0.16);
+}
+.segmented button {
+  font: inherit; font-size: 14px; font-weight: 500; color: var(--text);
+  border: 0; background: transparent; cursor: pointer;
+  padding: 7px 16px; border-radius: var(--r-pill);
+  transition: background .3s var(--ease), box-shadow .3s var(--ease);
+}
+.segmented button[aria-pressed="true"] {
+  background: var(--glass-bg-strong);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 60%, transparent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

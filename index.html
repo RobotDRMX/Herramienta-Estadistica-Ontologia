@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f7ff">
+  <title>Asistente de Inferencia Estadística</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/glass.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <script src="vendor/katex/katex.min.js"></script>
+  <script>
+    // Aplica el tema guardado antes de pintar, para evitar parpadeo
+    try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.tema = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar glass" id="sidebar" aria-label="Opciones">
+      <div class="sidebar__marca">
+        <span class="logo" aria-hidden="true">σ</span>
+        <div>
+          <strong>Inferencia</strong>
+          <small>Asistente estadístico</small>
+        </div>
+      </div>
+
+      <button class="btn btn--primary btn--block" type="button" id="nuevo">＋ Nuevo chat</button>
+
+      <section class="grupo grupo--historial">
+        <h2>Chats</h2>
+        <ul class="historial" id="historial" aria-label="Chats guardados"></ul>
+        <p class="ayuda" id="historial-vacio">Aún no hay chats guardados.</p>
+      </section>
+
+      <section class="grupo">
+        <h2>Versión</h2>
+        <div class="segmented segmented--block" role="group" aria-label="Versión de la herramienta">
+          <button type="button" data-modo="reglas" aria-pressed="true" title="Funciona sin IA, siempre disponible">Reglas</button>
+          <button type="button" data-modo="llm" aria-pressed="false" title="Usa un modelo de lenguaje para interpretar el texto">Con IA</button>
+        </div>
+        <p class="ayuda" id="estado">Sin IA · siempre disponible</p>
+      </section>
+
+      <details class="grupo plegable">
+        <summary>Ejemplos</summary>
+        <div class="lista" id="ejemplos"></div>
+      </details>
+
+      <section class="grupo grupo--pie">
+        <h2>Apariencia</h2>
+        <button class="btn btn--block" type="button" id="tema" aria-pressed="false">
+          <span id="tema-icono" aria-hidden="true">🌙</span> <span id="tema-texto">Tonos oscuros</span>
+        </button>
+      </section>
+    </aside>
+
+    <div class="velo" id="velo" hidden></div>
+
+    <main class="app">
+      <header class="topbar glass">
+        <button class="btn btn--icon menu" type="button" id="menu" aria-label="Abrir opciones" aria-controls="sidebar">☰</button>
+        <h1>Inferencia Estadística <small>Escribe tu ejercicio y te explico el procedimiento</small></h1>
+      </header>
+
+      <section class="chat" id="chat" aria-live="polite"></section>
+
+      <form class="composer glass glass--strong" id="form">
+        <textarea id="entrada" rows="1" placeholder="Escribe el ejercicio aquí…" aria-label="Enunciado del ejercicio"></textarea>
+        <button class="btn btn--primary" type="submit">Resolver</button>
+      </form>
+    </main>
+
+    <div class="menu-desc glass glass--strong" id="menu-desc" role="menu" aria-label="Formato de descarga" hidden>
+      <button type="button" role="menuitem" data-fmt="pdf"><span aria-hidden="true">📄</span> PDF</button>
+      <button type="button" role="menuitem" data-fmt="docx"><span aria-hidden="true">📝</span> Word (.docx)</button>
+    </div>
+    <div class="aviso-export" id="aviso-export" role="status" aria-live="polite" hidden></div>
+
+    <aside class="panel glass" id="panel" aria-label="Gráfica del resultado" aria-hidden="true">
+      <header class="panel__cab">
+        <div class="segmented" id="panel-lang" role="group" aria-label="Lenguaje de la gráfica">
+          <button type="button" data-lang="python" aria-pressed="true">Python</button>
+          <button type="button" data-lang="r" aria-pressed="false">R</button>
+        </div>
+        <button class="btn btn--icon" type="button" id="panel-cerrar" aria-label="Cerrar gráfica">✕</button>
+      </header>
+      <div class="panel__cuerpo" id="panel-cuerpo"></div>
+      <footer class="panel__pie">
+        <button class="btn" type="button" id="panel-png">⬇ Descargar PNG</button>
+        <button class="btn" type="button" id="panel-codigo">{ } Ver código</button>
+      </footer>
+    </aside>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

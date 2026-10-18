@@ -1,0 +1,60 @@
+/* Tokens de diseño — estilo iOS / Liquid Glass (sin dependencias) */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Paleta clara, tonos suaves */
+  --bg-1: #f4f7ff;
+  --bg-2: #fbf1ff;
+  --bg-3: #eefaf6;
+  --text: #1f2430;
+  --text-2: #667085;
+  --accent: #3b94ff;
+  --accent-2: #8b8aff;
+  --ok: #3fbf6a;
+  --warn: #f5a524;
+  --danger: #ff5d55;
+
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-strong: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 8px 28px rgba(80, 100, 160, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --blur: 24px;
+  --sat: 170%;
+
+  --r-sm: 12px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-pill: 999px;
+
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Tonos oscuros (manual) */
+:root[data-tema="oscuro"] {
+  --bg-1: #0b0d1a;
+  --bg-2: #1a1030;
+  --bg-3: #0a1f24;
+  --text: #f2f2f7;
+  --text-2: #a1a1a8;
+  --accent: #0a84ff;
+  --glass-bg: rgba(40, 42, 58, 0.5);
+  --glass-bg-strong: rgba(48, 50, 68, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Tonos oscuros (automático, si el usuario no eligió) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema]) {
+    --bg-1: #0b0d1a;
+    --bg-2: #1a1030;
+    --bg-3: #0a1f24;
+    --text: #f2f2f7;
+    --text-2: #a1a1a8;
+    --accent: #0a84ff;
+    --glass-bg: rgba(40, 42, 58, 0.5);
+    --glass-bg-strong: rgba(48, 50, 68, 0.78);
+    --glass-border: rgba(255, 255, 255, 0.14);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+}
