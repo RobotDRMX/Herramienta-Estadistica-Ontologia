@@ -63,8 +63,8 @@ export function bloques(chat) {
 
     if (r.grafica) {
       B.push({ t: "h2", text: "Gráficas" });
-      for (const lang of ["python", "r"]) {
-        for (const f of figuras(r.grafica, lang)) B.push({ t: "fig", lang, titulo: f.titulo, svg: f.svg, caption: `${lang === "python" ? "Python (matplotlib)" : "R (gráficos base)"} · ${f.titulo}` });
+      for (const lang of ["python", "r", "statgraphics"]) {
+        for (const f of figuras(r.grafica, lang)) B.push({ t: "fig", lang, titulo: f.titulo, svg: f.svg, caption: `${{ python: "Python (matplotlib)", r: "R (gráficos base)", statgraphics: "Statgraphics" }[lang]} · ${f.titulo}` });
       }
     }
   }

@@ -225,7 +225,7 @@ function llenarMedia(ctx) {
       const sent = sentenciaDe(n, a.tok.ini);
       const hayMuestraEnTexto = /muestr/.test(n);
       const cueTxt = n.slice(a.cue.ini, a.cue.fin);
-      const sigma = !/desconocid/.test(sent) && (/poblacional/.test(cueTxt) || /se sabe|conocid|sigma|σ/.test(sent) || (hayMuestraEnTexto && !/muestr/.test(sent)));
+      const sigma = !/desconocid/.test(sent) && (/poblacional/.test(cueTxt) || /se sabe|conocid|sigma|σ/.test(sent) || (hayMuestraEnTexto && !/muestr/.test(sent) && !/\b(?:media|promedio|medio)\b/.test(sent)));
       poner(ctx, sigma ? "sigma" : "s", a.tok);
     } else if (a.rol === "var") poner(ctx, "s", a.tok, Math.sqrt(a.tok.valor), `s² = ${a.tok.valor}`);
   }

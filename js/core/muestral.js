@@ -74,7 +74,7 @@ const DOS_GRUPOS = /diferencia|p\s*barra\s*a|x\s*barra\s*a|x_\s*a\s*[-−–]|(?
 function detectarTipoDM(n) {
   const dos = DOS_GRUPOS.test(n);
   const hayPct = /\d\s*(?:%|por ciento)/.test(n);
-  const prop = !MEDIA_PALABRAS.test(n) && (/proporcion|porcentaje|p\s*barra/.test(n) || (hayPct && PROP_PALABRAS.test(n)) || PROP_PALABRAS.test(n));
+  const prop = !MEDIA_PALABRAS.test(n) && (/proporcion|porcentaje|p\s*barra/.test(n) || hayPct || PROP_PALABRAS.test(n));
   if (dos) return prop ? "dm_dif_proporciones" : "dm_dif_medias";
   return prop ? "dm_proporcion" : "dm_media";
 }

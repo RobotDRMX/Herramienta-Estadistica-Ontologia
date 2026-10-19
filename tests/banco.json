@@ -2,29 +2,31 @@
  {
   "id": "ej35",
   "tipo": "ic_media",
-  "texto": "La dueña de un centro comercial desea estimar el promedio del valor de venta de los maletines que tiene en su inventario. Un muestra aleatoria de 12 maletines dio un valor promedio de 77,8 (en miles de pesos) y una desviación estándar de 11,1. Suponiendo que la población de precios se distribuye normalmente, calcule un intervalo de 95% de confianza para el valor de venta promedio de todos los maletines en cuestión.",
+  "texto": "Una tienda de mochilas quiere estimar el precio promedio de su inventario. Con una muestra aleatoria de 12 mochilas obtuvo un precio medio de 77,8 (en miles de pesos) y una desviación estándar de 11,1. Suponiendo que los precios son normales, calcule un intervalo de confianza del 95% para el precio promedio.",
   "datos": {
    "n": 12,
    "xbar": 77.8,
    "s": 11.1,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej36",
   "tipo": "ic_media",
-  "texto": "El director de servicio a pacientes de una empresa de salud desea evaluar el tiempo de espera de los pacientes en una instalación local. De un libro de citas, se tomó una muestra aleatoria de 16 pacientes, la cual arrojó una media de 65,7 minutos y una desviación estándar de 3,4. Utilice estas estadísticas para construir un intervalo del 99% de confianza para el tiempo de espera de la población. Asuma que la población estipulada se distribuye normalmente.",
+  "texto": "Un hospital quiere conocer cuánto espera un paciente antes de ser atendido. En una muestra aleatoria de 16 pacientes el tiempo medio fue de 65,7 minutos con una desviación estándar de 3,4. Construya un intervalo del 99% de confianza para el tiempo de espera promedio, asumiendo que es normal.",
   "datos": {
    "n": 16,
    "xbar": 65.7,
    "s": 3.4,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej37",
   "tipo": "ic_media",
-  "texto": "El departamento de servicio a clientes de la compañía local de gas para viviendas desea estimar el periodo promedio entre la llegada de una solicitud de servicio y la conexión del mismo. Se seleccionó una muestra aleatoria de 6 casas a partir de los registros disponibles del año anterior. Los resultados registrados en números de días son: 150, 162, 178, 158, 162 y 171. Construya un intervalo del 90% de confianza del tiempo de espera promedio de la población durante el año pasado. Suponga que la población en cuestión se distribuye normalmente.",
+  "texto": "Una empresa de internet registró, en días, el tiempo entre la solicitud de instalación y su activación para 6 clientes elegidos al azar: 150, 162, 178, 158, 162 y 171. Estime con un 90% de confianza el tiempo medio de activación, suponiendo que los tiempos son normales.",
   "datos": {
    "crudos": [
     150,
@@ -35,12 +37,13 @@
     171
    ],
    "confianza": 0.9
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej38",
   "tipo": "ic_media",
-  "texto": "Una máquina produce varillas metálicas usadas en el sistema de suspensión de un automóvil. Se selecciona una muestra aleatoria de 10 varillas y se mide el diámetro. Los datos resultantes (en centímetros) se encuentran a continuación: 1,014 1,009 1,041 0,962 1,058 1,024 1,019 1,020 1,002 0,958. Asumiendo que el diámetro de las varillas provienen de una población normal, encuentre un intervalo de 99% de confianza para el diámetro medio de las varillas.",
+  "texto": "Una fábrica produce ejes cilíndricos. Se mide el diámetro, en centímetros, de 10 ejes tomados al azar: 1,014 1,009 1,041 0,962 1,058 1,024 1,019 1,020 1,002 0,958. Si los diámetros siguen una distribución normal, halle un intervalo de 99% de confianza para el diámetro medio.",
   "datos": {
    "crudos": [
     1.014,
@@ -55,23 +58,25 @@
     0.958
    ],
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej39",
   "tipo": "ic_media",
-  "texto": "Un corredor de la Bolsa de Valores de Nueva York tiene curiosidad acerca del tiempo que transcurre entre la colocación de una orden de venta y su ejecución. El corredor hizo un muestreo de 45 órdenes y encontró que el tiempo medio para la ejecución fue 24,3 minutos, con una desviación de 3,2 minutos. Ayude al corredor con la construcción de un intervalo de confianza del 95% para el tiempo medio transcurrido en la ejecución de una orden.",
+  "texto": "Un analista midió cuánto tarda en ejecutarse una orden de compra en una plataforma: en 45 órdenes el tiempo medio fue de 24,3 minutos, con una desviación de 3,2 minutos. Construya un intervalo de confianza del 95% para el tiempo medio de ejecución.",
   "datos": {
    "n": 45,
    "xbar": 24.3,
    "s": 3.2,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej40",
   "tipo": "ic_media",
-  "texto": "Una máquina produce reglas de madera. Se toma una muestra de las reglas, hallándose que las longitudes son: 1,04; 0,99; 1,01; 1,01; 1,03; 0,97; 1,03; 0,98 y 0,99 metros. Encuentre un intervalo de confianza de 99% para la longitud de las reglas de esta máquina. Suponga que la población tiene una distribución aproximadamente normal.",
+  "texto": "Se miden las longitudes, en metros, de 9 tablones: 1,04; 0,99; 1,01; 1,01; 1,03; 0,97; 1,03; 0,98 y 0,99. Suponiendo una distribución aproximadamente normal, encuentre un intervalo de confianza del 99% para la longitud media.",
   "datos": {
    "crudos": [
     1.04,
@@ -85,45 +90,49 @@
     0.99
    ],
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej41",
   "tipo": "ic_media",
-  "texto": "Se toma una muestra aleatoria de 12 alambres de acero para realizar un estudio de dureza. Se realizaron mediciones de la dureza para cada uno de las 12 alambres de la muestra y se obtuvo un valor promedio de 48,50 con una desviación estándar de 1,5. Suponiendo que los valores se distribuyen normalmente, construya un intervalo de confianza de 90% para la dureza media.",
+  "texto": "Para estudiar la resistencia de unos cables se probaron 12 cables elegidos al azar y se obtuvo una resistencia promedio de 48,50 con una desviación estándar de 1,5. Si los valores son normales, construya un intervalo de confianza del 90% para la resistencia media.",
   "datos": {
    "n": 12,
    "xbar": 48.5,
    "s": 1.5,
    "confianza": 0.9
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej43",
   "tipo": "ic_media",
-  "texto": "Una muestra aleatoria de 110 estudiantes de primer grado de cierta escuela pública alcanzaron una altura promedio muestral de 0,81 metros con una desviación estándar muestral de 0,34 metros. Calcule un intervalo de confianza de 99% para la verdadera altura promedio μ e interprete el intervalo resultante.",
+  "texto": "Se midió la estatura de 110 niños de primaria elegidos al azar: el promedio fue de 0,81 metros y la desviación estándar muestral de 0,34 metros. Calcule un intervalo de confianza del 99% para la estatura media de todos los niños de esa escuela.",
   "datos": {
    "n": 110,
    "xbar": 0.81,
    "s": 0.34,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej44",
   "tipo": "ic_media",
-  "texto": "Una muestra aleatoria de 8 personas produjo una edad promedio muestral de 30,2 años y una desviación estándar de 3,1 años. Si se supone que la edad está normalmente distribuida, calcule un intervalo de confianza de 95% para la verdadera edad promedio.",
+  "texto": "Una muestra aleatoria de 8 voluntarios dio una edad promedio de 30,2 años y una desviación estándar de 3,1 años. Suponiendo que la edad se distribuye normalmente, calcule un intervalo de confianza del 95% para la edad media.",
   "datos": {
    "n": 8,
    "xbar": 30.2,
    "s": 3.1,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej45",
   "tipo": "ic_media",
-  "texto": "Los siguientes datos representan el incremento porcentual de las utilidades de 18 empresas durante el año pasado: 44,5 35,7 33,5 23,5 45,6 32,5 31,5 34,0 46,7 39,3 22,0 51,2 41,4 37,2 51,5 36,4 42,5 46,9 (a) Trace un diagrama de caja para estos datos y comente sobre sus interesantes propiedades. (b) ¿Es factible que se haya seleccionado la muestra de una población con distribución normal? Explique. (c) Calcule un intervalo de confianza de 98% para el incremento porcentual promedio.",
+  "texto": "Se registró el crecimiento porcentual de las ganancias de 18 negocios en el último año: 44,5 35,7 33,5 23,5 45,6 32,5 31,5 34,0 46,7 39,3 22,0 51,2 41,4 37,2 51,5 36,4 42,5 46,9 (a) Elabore un diagrama de caja y comente lo que observe. (b) ¿Es razonable suponer normalidad? Explique. (c) Calcule un intervalo de confianza del 98% para el crecimiento porcentual promedio.",
   "datos": {
    "crudos": [
     44.5,
@@ -146,67 +155,73 @@
     46.9
    ],
    "confianza": 0.98
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej46a",
   "tipo": "ic_media",
-  "texto": "Se sabe que el peso de las piezas de motor producidas por una determinada industria sigue una distribución normal con una desviación típica de 0,12 kilos. En el día de hoy, se extrae una muestra aleatoria de 60 piezas de motor cuyo peso medio es de 4,07 kilos. (a) Calcule un intervalo de confianza del 99% para el peso medio de las piezas de motor producidas hoy. (b) Sin realizar los cálculos, determine si un intervalo de confianza del 95% para la media poblacional tendría mayor, menor o la misma longitud que el calculado en el inciso (a).",
+  "texto": "Se sabe que el peso de cierto componente sigue una distribución normal con desviación típica de 0,12 kilos. Hoy se tomó una muestra aleatoria de 60 componentes cuyo peso medio fue de 4,07 kilos. (a) Calcule un intervalo de confianza del 99% para el peso medio de la producción de hoy. (b) Sin calcular, indique si con 95% de confianza el intervalo sería más largo, más corto o igual.",
   "datos": {
    "sigma": 0.12,
    "n": 60,
    "xbar": 4.07,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej47a",
   "tipo": "ic_media",
-  "texto": "Un carpintero ha comprobado que las longitudes de las puertas solicitadas por sus clientes sigue una distribución normal con una desviación típica de 32,4 centímetros. La media de las longitudes relativas a una muestra aleatoria de nueve puertas es de 187,9 centímetros. (a) Calcule un intervalo de confianza del 80% para la longitud media poblacional de las puertas solicitadas.",
+  "texto": "Se sabe que el largo de los marcos que pide cierta clientela es normal, con desviación típica de 32,4 centímetros. La media de una muestra aleatoria de nueve marcos fue de 187,9 centímetros. (a) Calcule un intervalo de confianza del 80% para el largo medio de todos los marcos.",
   "datos": {
    "sigma": 32.4,
    "n": 9,
    "xbar": 187.9,
    "confianza": 0.8
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej48a",
   "tipo": "ic_media",
-  "texto": "Se tomó una muestra aleatoria de 541 votantes y se les pidió que calificasen, en una escala de uno (totalmente en desacuerdo) a cinco (totalmente de acuerdo), la siguiente afirmación: \"El presidente debe promulgar una ley a favor del aborto\". La calificación media y desviación típica de la muestra fueron de 3,81 y 1,34, respectivamente. (a) Calcule un intervalo de confianza del 90% para la calificación media poblacional.",
+  "texto": "En una muestra aleatoria de 541 personas se pidió valorar de 1 a 5 el grado de acuerdo con una nueva ley. La valoración media y la desviación típica de la muestra fueron 3,81 y 1,34, respectivamente. (a) Calcule un intervalo de confianza del 90% para la valoración media poblacional.",
   "datos": {
    "n": 541,
    "xbar": 3.81,
    "s": 1.34,
    "confianza": 0.9
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej49",
   "tipo": "ic_media",
-  "texto": "Un método diseñado para medir la eficacia de cierto medicamento consiste en un examen médico al que es sometido una muestra aleatoria de 352 personas. En este caso, un valor de 57 sobre 100 supone efectividad. El valor medio y la desviación típica de la muestra fueron de 60,41% y 11,28%, respectivamente. Calcule un intervalo de confianza del 90% para el valor medio poblacional y comente el resultado obtenido.",
+  "texto": "Una prueba clínica evalúa a 352 pacientes elegidos al azar y asigna una puntuación de 0 a 100. El valor medio y la desviación típica de la muestra fueron de 60,41% y 11,28%, respectivamente. Calcule un intervalo de confianza del 90% para el valor medio poblacional y comente el resultado.",
   "datos": {
    "n": 352,
    "xbar": 60.41,
    "s": 11.28,
    "confianza": 0.9
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej50",
   "tipo": "ic_media",
-  "texto": "Una empresa está interesada en conocer los gastos en fotocopias de los estudiantes universitarios en la primera semana del semestre académico. La media y la desviación típica de una muestra aleatoria de 9 estudiantes fueron de 15.782 pesos y 3.889 pesos, respectivamente. Suponiendo que la población sigue una distribución normal, calcule un intervalo de confianza del 95% para el gasto medio poblacional.",
+  "texto": "Se encuesta el gasto en impresiones de una muestra aleatoria de 9 universitarios durante la primera semana de clases. La media y la desviación típica fueron de 15.782 pesos y 3.889 pesos, respectivamente. Suponiendo normalidad, calcule un intervalo de confianza del 95% para el gasto medio.",
   "datos": {
    "n": 9,
    "xbar": 15782,
    "s": 3889,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej51a",
   "tipo": "ic_media",
-  "texto": "Una muestra aleatoria de 10 personas en un estadio de fútbol reportó las siguientes edades: 20,3 16,8 19,5 12,3 17,2 18,2 25,9 6,3 11,8 15,4 (a) Suponiendo que la población en cuestión es normal, calcule un intervalo de confianza del 99% para la media poblacional. (b) Sin realizar los cálculos, determine si un intervalo de confianza del 90% para la media poblacional tendría una longitud mayor, menor o igual a la obtenida en el apartado (a).",
+  "texto": "Se anotó la edad de 10 asistentes elegidos al azar en un concierto: 20,3 16,8 19,5 12,3 17,2 18,2 25,9 6,3 11,8 15,4 (a) Suponiendo que la población es normal, calcule un intervalo de confianza del 99% para la edad media. (b) Sin calcular, ¿un intervalo del 90% sería más largo, más corto o igual?",
   "datos": {
    "crudos": [
     20.3,
@@ -221,102 +236,112 @@
     15.4
    ],
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej52",
   "tipo": "ic_proporcion",
-  "texto": "Se estudia la fracción de circuitos integrados defectuosos producidos en un proceso de fotolitografía. Se prueba, para esto, una muestra aleatoria de 60 circuitos, la cual da como resultado 38 circuitos defectuosos. Construya un intervalo del 99% de confianza para la verdadera proporción de circuitos defectuosos.",
+  "texto": "Un laboratorio revisa chips de memoria. En una muestra aleatoria de 60 chips, 38 resultaron defectuosos. Construya un intervalo del 99% de confianza para la proporción real de chips defectuosos.",
   "datos": {
    "n": 60,
    "x": 38,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej53",
   "tipo": "ic_proporcion",
-  "texto": "De una muestra aleatoria de 140 estudiantes de una universidad, 74 indicaron que provienen de estratos altos. Construya un intervalo del 90% de confianza para estimar la proporción de estudiantes en toda la universidad que provienen de estratos altos.",
+  "texto": "En una muestra aleatoria de 140 alumnos de una facultad, 74 dijeron que trabajan además de estudiar. Construya un intervalo del 90% de confianza para la proporción de alumnos de toda la facultad que trabajan.",
   "datos": {
    "n": 140,
    "x": 74,
    "confianza": 0.9
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej54",
   "tipo": "ic_proporcion",
-  "texto": "Un fabricante de calculadoras electrónicas está interesado en estimar la fracción de unidades defectuosas. De modo que, en una muestra aleatoria de 350 calculadoras pertinentes, 161 resultaron defectuosas. Construya un intervalo del 99% de confianza para la verdadera proporción de calculadoras defectuosas.",
+  "texto": "Una marca de relojes inspecciona su producción: en una muestra aleatoria de 350 relojes, 161 presentaron fallas. Construya un intervalo del 99% de confianza para la proporción real de relojes con fallas.",
   "datos": {
    "n": 350,
    "x": 161,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej55",
   "tipo": "ic_proporcion",
-  "texto": "En una muestra aleatoria de 249 amas de casa, se encontró que el 87% realizaron carreras universitarias. Construya un intervalo del 92% de confianza para la verdadera proporción de tales amas de casa.",
+  "texto": "En una muestra aleatoria de 249 vecinos, el 87% afirmó estar satisfecho con el servicio de recolección de basura. Construya un intervalo del 92% de confianza para la proporción de vecinos satisfechos.",
   "datos": {
    "n": 249,
    "p": 0.87,
    "confianza": 0.92
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej56",
   "tipo": "ic_proporcion",
-  "texto": "El gerente de operaciones de un periódico en una ciudad grande desea determinar la proporción de periódicos impresos que tienen un atributo no conforme, como muy borroso, mal paginado, páginas faltantes, páginas duplicadas, etc. El gerente determina que debe seleccionarse una muestra aleatoria de 100 periódicos para el análisis. Suponga que de esta muestra, 70 contienen algún tipo de conformidad. Construya un intervalo del 99% de confianza para aproximar la proporción de periódicos que contienen algún tipo de conformidad.",
+  "texto": "Una imprenta revisa una muestra aleatoria de 100 libros y encuentra que 70 tienen algún error de impresión. Construya un intervalo del 99% de confianza para la proporción de libros con algún error.",
   "datos": {
    "n": 100,
    "x": 70,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej57",
   "tipo": "ic_proporcion",
-  "texto": "Un auditor del departamento estatal de seguros desea determinar la proporción de reclamaciones pagadas por una compañía de seguros de salud dentro de los dos meses siguientes a la recepción de la solicitud. Se selecciona una muestra aleatoria de 1.000 reclamaciones y se determina que 228 se pagaron en menos de 2 meses. Encuentre el intervalo de confianza de 99% para la proporción de la población de reclamaciones pagadas en el lapso requerido.",
+  "texto": "De una muestra aleatoria de 1.000 facturas de una empresa, 228 se pagaron antes de 30 días. Encuentre el intervalo de confianza de 99% para la proporción de facturas pagadas en ese plazo.",
   "datos": {
    "n": 1000,
    "x": 228,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej59",
   "tipo": "ic_proporcion",
-  "texto": "En una prueba practicada a un tipo de autos de carreras, a 11 de 35 se les recalentó el motor a una velocidad de 250 kilómetros por hora. Construya un intervalo de confianza de 90% para la verdadera proporción de autos de este tipo cuyos motores se recalentaron a una velocidad de 250 kilómetros por hora.",
+  "texto": "En una prueba, a 11 de 35 motocicletas se les sobrecalentó el motor al circular a 120 kilómetros por hora. Construya un intervalo de confianza de 90% para la proporción de motocicletas de este tipo que se sobrecalientan a esa velocidad.",
   "datos": {
    "n": 35,
    "x": 11,
    "confianza": 0.9
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej60",
   "tipo": "ic_proporcion",
-  "texto": "La alcaldía de cierta ciudad está considerando la posibilidad de construir un mural en memoria de un famoso escritor de la misma, lo cual conduciría a un aumento de cierto impuesto que existe en la actualidad. Una muestra aleatoria de 610 habitantes de la ciudad revela que el 50,7% de los encuestados está en contra de dicha medida. Halle un intervalo de confianza del 99% para la proporción de la población que no está de acuerdo con la construcción del mural.",
+  "texto": "Un municipio consulta a 610 habitantes elegidos al azar sobre un nuevo parque; el 50,7% dijo estar en contra. Halle un intervalo de confianza del 99% para la proporción de habitantes que está en contra del proyecto.",
   "datos": {
    "n": 610,
    "p": 0.507,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej62a",
   "tipo": "ic_proporcion",
-  "texto": "De una muestra aleatoria de 95 gerentes de las empresas más importantes de cierta ciudad, se estableció que 29 eran extranjeros. (a) Calcule un intervalo de confianza del 99% para la proporción poblacional. (b) Sin hacer los cálculos, determine si un intervalo de confianza del 90% tendría una longitud mayor, menor o igual a la obtenida en el apartado (a).",
+  "texto": "De una muestra aleatoria de 95 directivos de las mayores empresas de una ciudad, 29 eran mujeres. (a) Calcule un intervalo de confianza del 99% para la proporción poblacional de directivas. (b) Sin calcular, ¿un intervalo del 90% sería más largo, más corto o igual?",
   "datos": {
    "n": 95,
    "x": 29,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej2.3.2",
   "tipo": "ic_proporcion",
-  "texto": "En una muestra aleatoria de 85 soportes para la pieza de un motor de automóvil, 10 tienen un pequeño defecto. Calcule un intervalo de confianza del 95% para la proporción p de piezas de motor que tienen un pequeño defecto en la población.",
+  "texto": "Se inspeccionaron al azar 85 tornillos de anclaje y 10 tenían una pequeña rebaba. Calcule un intervalo de confianza del 95% para la proporción de tornillos con rebaba en toda la producción.",
   "datos": {
    "n": 85,
    "x": 10,
@@ -326,12 +351,13 @@
    0.05,
    0.19
   ],
-  "tol": 0.01
+  "tol": 0.01,
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej2.3.3",
   "tipo": "ic_proporcion",
-  "texto": "Una reconocida revista reportó que: \"uno de cada cuatro directores ejecutivos es una persona con más de 35 años de edad\". Si en una muestra aleatoria de 350 compañías de cierto país, 77 tienen directores ejecutivos con más de 35 años de edad, ¿un intervalo de confianza del 99% apoyaría la afirmación?",
+  "texto": "Una revista asegura que una de cada cuatro empresas es dirigida por alguien mayor de 35 años. En una muestra aleatoria de 350 empresas, 77 tienen un director mayor de 35 años. ¿Un intervalo de confianza del 99% apoyaría la afirmación?",
   "datos": {
    "n": 350,
    "x": 77,
@@ -341,96 +367,104 @@
    0.163,
    0.277
   ],
-  "tol": 0.002
+  "tol": 0.002,
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej66",
   "tipo": "ic_dif_proporciones",
-  "texto": "Una empresa de teléfonos precisa estimar, a nivel nacional, la proporción de viviendas que comprarían una línea adicional si estuviera disponible a un costo de instalación reducido sustancialmente. En la ciudad A, se selecciona una muestra aleatoria de 1.000 viviendas, indicando los resultados que 250 de las viviendas comprarían la línea adicional en las condiciones previstas. En otra ciudad B, 275 de 1.000 viviendas comprarían la línea adicional. Calcule un intervalo de confianza del 95% para la diferencia entre la proporción de viviendas en las ciudades A y B que comprarían la línea adicional a un costo adicional de instalación reducida.",
+  "texto": "Una compañía de telecomunicaciones quiere comparar el interés por un servicio extra en dos ciudades. En la ciudad A se encuestó una muestra aleatoria de 1.000 hogares y 250 dijeron que lo contratarían. En la ciudad B, 275 de 1.000 hogares lo contratarían. Calcule un intervalo de confianza del 95% para la diferencia entre las proporciones de hogares de las ciudades A y B interesados en el servicio.",
   "datos": {
    "n1": 1000,
    "x1": 250,
    "n2": 1000,
    "x2": 275,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej67",
   "tipo": "ic_dif_proporciones",
-  "texto": "Una encuesta respondida por 1.000 estudiantes de un colegio A concluye que 726 no tienen hábito de lectura. En otro colegio B se realizó la misma encuesta a 760 estudiantes, concluyéndose que 240 de ellos tienen hábito de lectura. Calcule un intervalo de confianza del 95% para la diferencia entre la proporción de estudiantes que tienen hábito de lectura entre las dos encuestas. ¿Hay una diferencia significativa?",
+  "texto": "En el colegio A respondieron una encuesta 1.000 alumnos y 726 dijeron que no leen por gusto. En el colegio B se aplicó la misma encuesta a 760 alumnos y 240 dijeron que sí leen por gusto. Calcule un intervalo de confianza del 95% para la diferencia entre las proporciones de alumnos que leen por gusto. ¿Hay una diferencia significativa?",
   "datos": {
    "n1": 1000,
    "x1": 274,
    "n2": 760,
    "x2": 240,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej68",
   "tipo": "ic_dif_proporciones",
-  "texto": "Un científico se interesa en la proporción de estudiantes del último semestre de dos universidades de una misma ciudad que tienen planes de especializarse en el exterior. Suponga que se toman muestras independientes de cada una de las dos universidades, encontrándose que 24 de 100 estudiantes de la universidad A y 36 de 120 individuos de la universidad B tienen esta aspiración. Construya un intervalo de confianza de 95% para la diferencia entre las proporciones de estos estudiantes que aspiran a especializarse en el exterior.",
+  "texto": "Se quiere comparar el interés por estudiar un posgrado fuera del país entre estudiantes de dos facultades. Se toman muestras independientes: 24 de 100 estudiantes de la facultad A y 36 de 120 de la facultad B tienen ese plan. Construya un intervalo de confianza del 95% para la diferencia entre las proporciones.",
   "datos": {
    "n1": 100,
    "x1": 24,
    "n2": 120,
    "x2": 36,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej69",
   "tipo": "ic_dif_proporciones",
-  "texto": "De una muestra aleatoria de 1.203 estudiantes de contaduría de cierto año, el 20,2% afirmó que la oferta laboral era muy mal pagada. De una muestra aleatoria de 1.203 estudiantes de empresariales en otro año posterior, el 13,2% compartían dicha opinión. Calcule un intervalo de confianza del 99% para la diferencia entre las proporciones poblacionales.",
+  "texto": "De una muestra aleatoria de 1.203 clientes de una tienda en línea, el 20,2% se quejó del tiempo de entrega. En otra muestra aleatoria de 1.203 clientes de un año posterior, el 13,2% presentó la misma queja. Calcule un intervalo de confianza del 99% para la diferencia entre las proporciones poblacionales.",
   "datos": {
    "n1": 1203,
    "p1": 0.202,
    "n2": 1203,
    "p2": 0.132,
    "confianza": 0.99
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej70",
   "tipo": "ic_dif_proporciones",
-  "texto": "Un equipo de científicos infectó 200 animales de una determinada especie con cierta enfermedad. Luego trató la mitad de los animales con un medicamento A y la otra mitad con uno B. De los animales tratados con el producto A, 75 sobrevivieron; mientras que, de los tratados con el producto B, sobrevivieron 64. Construya el intervalo de confianza del 95% para la diferencia de proporciones pA - pB. Interprete los resultados.",
+  "texto": "Un grupo de investigadores contagió a 200 ratones con un virus. A la mitad les dio el tratamiento A y a la otra mitad el B. Con el tratamiento A sobrevivieron 75; con el B, 64. Construya un intervalo de confianza del 95% para la diferencia de proporciones de supervivencia pA - pB e interprete.",
   "datos": {
    "n1": 100,
    "x1": 75,
    "n2": 100,
    "x2": 64,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej71",
   "tipo": "ic_dif_proporciones",
-  "texto": "Una muestra aleatoria de 300 funcionarios reveló que el 75% ve regularmente un determinado programa de televisión. De otra muestra aleatoria de 200 funcionarios, el 66% manifestó que veía el programa regularmente. Construya el intervalo de confianza del 95% para la diferencia entre las dos proporciones poblacionales e interprete los resultados.",
+  "texto": "Una muestra aleatoria de 300 empleados reveló que el 75% usa el transporte de la empresa. En otra muestra aleatoria de 200 empleados, el 66% lo usa. Construya el intervalo de confianza del 95% para la diferencia entre las dos proporciones poblacionales e interprete.",
   "datos": {
    "n1": 300,
    "p1": 0.75,
    "n2": 200,
    "p2": 0.66,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej72",
   "tipo": "ic_dif_proporciones",
-  "texto": "En un estudio de los tipos de crímenes cometidos por jóvenes delincuentes confinados en dos instituciones correccionales, durante un periodo de 10 años, los investigadores observaron los siguientes hechos: en la ciudad A, de 200, el 32% de los jóvenes fue detenido por asalto o crimen; en la ciudad B, de 225, el 25% de los jóvenes fue detenido por las mismas causas. Construya un intervalo de confianza del 95% para la diferencia de proporciones pA-pB. Interprete sus resultados.",
+  "texto": "En dos reclusorios se estudió la reincidencia durante 10 años: en el A, de 200 internos, el 32% reincidió; en el B, de 225 internos, el 25%. Construya un intervalo de confianza del 95% para la diferencia de proporciones pA - pB e interprete.",
   "datos": {
    "n1": 200,
    "p1": 0.32,
    "n2": 225,
    "p2": 0.25,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej2.4.2",
   "tipo": "ic_dif_proporciones",
-  "texto": "Se extrajeron dos muestras aleatorias independientes de estudiantes universitarios de estadística con base en el sexo. De 120 hombres, 107 esperaban disfrutar un trabajo de tiempo completo en un máximo de 6 años. En tanto que, de 141 mujeres encuestadas, 73 tenían esta esperanza. Hállese un intervalo de confianza del 95% para la diferencia entre las proporciones poblacionales.",
+  "texto": "Se tomaron dos muestras independientes de aspirantes según su sexo. De 120 hombres, 107 prefieren trabajo presencial; de 141 mujeres, 73 lo prefieren. Hállese un intervalo de confianza del 95% para la diferencia entre las proporciones poblacionales.",
   "datos": {
    "n1": 120,
    "x1": 107,
@@ -442,12 +476,13 @@
    0.275,
    0.473
   ],
-  "tol": 0.003
+  "tol": 0.003,
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej76",
   "tipo": "ic_dif_medias",
-  "texto": "Los estudiantes de una universidad pueden elegir entre un curso de cierta asignatura sin práctica de tres horas al semestre y otro curso con práctica de 4 horas al semestre. El examen final es el mismo para cada grupo. Si 12 estudiantes del grupo con práctica tiene una calificación promedio (en escala de 1 a 100) de 84 en el examen con una desviación estándar de 4 y, por otro lado, 18 estudiantes del grupo sin práctica tienen una calificación promedio de 77 con una desviación estándar de 6, encuentre un intervalo de confianza de 99% para la diferencia entre las calificaciones promedio de los dos grupos. Suponga que las poblaciones se distribuyen de forma aproximadamente normal con varianzas iguales. Interprete sus respuestas.",
+  "texto": "Una universidad ofrece un curso con laboratorio y otro sin laboratorio. Si 12 estudiantes del grupo con laboratorio tienen una calificación promedio de 84 con desviación estándar de 4, y 18 estudiantes del grupo sin laboratorio tienen un promedio de 77 con desviación estándar de 6, encuentre un intervalo de confianza de 99% para la diferencia entre las calificaciones promedio. Suponga poblaciones aproximadamente normales con varianzas iguales.",
   "datos": {
    "n1": 12,
    "x1": 84,
@@ -459,12 +494,13 @@
   },
   "opciones": {
    "varianzasIguales": true
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej77",
   "tipo": "ic_dif_medias",
-  "texto": "Los siguientes datos representan la edad (en años) de los estudiantes de cuarto semestre matriculados en dos cursos de estadística descriptiva: Grupo 1: n1 = 14, x̄1 = 17, s²₁ = 1,5. Grupo 2: n2 = 16, x̄2 = 19, s²₂ = 1,8. Encuentre un intervalo de confianza de 99% para la diferencia μ2-μ1 en la edad promedio de los estudiantes. Suponga poblaciones normales con varianzas iguales.",
+  "texto": "Edad, en años, de estudiantes de dos grupos de estadística. Grupo 1: n1 = 14, x̄1 = 17, s²₁ = 1,5. Grupo 2: n2 = 16, x̄2 = 19, s²₂ = 1,8. Encuentre un intervalo de confianza de 99% para la diferencia μ2-μ1 de las edades medias. Suponga poblaciones normales con varianzas iguales.",
   "datos": {
    "n1": 14,
    "x1": 17,
@@ -474,12 +510,13 @@
   },
   "opciones": {
    "varianzasIguales": true
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej78",
   "tipo": "ic_dif_medias",
-  "texto": "Una empresa de buses trata de decidir si compra neumáticos entre dos marcas diferentes, A o B, para sus buses. Para determinar la diferencia de las dos marcas, se lleva a cabo un experimento utilizando, hasta ser desgastados, 12 neumáticos de cada marca. Los resultados son: Marca A: x̄1 = 36.300 kilómetros, s1 = 5.000 kilómetros. Marca B: x̄2 = 38.100 kilómetros, s2 = 6.100 kilómetros. Calcule un intervalo de confianza de 95% para μ1 - μ2. Suponga que las poblaciones se distribuyen de forma aproximadamente normal y que las varianzas no son iguales.",
+  "texto": "Una flota de autobuses compara dos marcas de llantas, A y B, usando 12 llantas de cada marca hasta su desgaste. Marca A: x̄1 = 36.300 km, s1 = 5.000 km. Marca B: x̄2 = 38.100 km, s2 = 6.100 km. Calcule un intervalo de confianza de 95% para μ1 - μ2. Suponga normalidad y que las varianzas no son iguales.",
   "datos": {
    "n1": 12,
    "x1": 36300,
@@ -491,12 +528,13 @@
   },
   "opciones": {
    "varianzasIguales": false
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej81",
   "tipo": "ic_dif_medias",
-  "texto": "El peso medio de una muestra de 40 productos elaborados con una técnica especial es de 322,12 gramos y la desviación típica, de 54,53 gramos. En tanto que el peso medio y la desviación típica de otra muestra aleatoria de 61 productos, en los que no se emplearon dichas técnicas para su elaboración, fueron iguales a 304,61 y 62,61 gramos, respectivamente. Calcule un intervalo de confianza del 95% para la diferencia entre los dos pesos medios poblacionales. ¿Hay diferencia significativa? Explique.",
+  "texto": "El peso medio de una muestra de 40 piezas hechas con un método nuevo es de 322,12 gramos y su desviación típica, de 54,53 gramos. El peso medio y la desviación típica de otra muestra aleatoria de 61 piezas hechas con el método anterior fueron 304,61 y 62,61 gramos, respectivamente. Calcule un intervalo de confianza del 95% para la diferencia entre los pesos medios poblacionales.",
   "datos": {
    "n1": 40,
    "x1": 322.12,
@@ -505,12 +543,13 @@
    "x2": 304.61,
    "s2": 62.61,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej82",
   "tipo": "ic_dif_medias",
-  "texto": "Se sometió a estudio una población de consumos del servicio de energía. Para una muestra aleatoria de 138 casas del estrato 1 de la ciudad A, el consumo medio total fue de 36.558 pesos y la desviación típica, de 11.624 pesos. Al tiempo que, para una muestra aleatoria independiente de 266 casas del estrato 1 de la ciudad B, el consumo medio y la desviación típica fue de 37.499 y 16.521 pesos, respectivamente. Calcule un intervalo de confianza del 90% para la diferencia entre las dos medias poblacionales.",
+  "texto": "Se estudió el consumo de electricidad en dos ciudades. En una muestra aleatoria de 138 viviendas de la ciudad A, el consumo medio fue de 36.558 pesos y la desviación típica de 11.624 pesos. En una muestra aleatoria independiente de 266 viviendas de la ciudad B, el consumo medio y la desviación típica fueron 37.499 y 16.521 pesos, respectivamente. Calcule un intervalo de confianza del 90% para la diferencia entre las medias poblacionales.",
   "datos": {
    "n1": 138,
    "x1": 36558,
@@ -519,12 +558,13 @@
    "x2": 37499,
    "s2": 16521,
    "confianza": 0.9
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej83",
   "tipo": "ic_dif_medias",
-  "texto": "Un científico intenta estimar la efectividad de un medicamento en la habilidad de los individuos para realizar una determinada tarea de coordinación psicomotriz. Los elementos de una muestra aleatoria de 9 personas tomaron el medicamento antes de realizar la prueba. La calificación media obtenida fue 9,78 y la varianza muestral 17,64. Otra muestra aleatoria independiente de 10 personas, que no tomó el medicamento, se empleó como grupo de control. La calificación media y varianza muestral de este grupo de control fueron 15,10 y 27,01, respectivamente. Suponiendo que la distribuciones poblacionales son normales con varianzas iguales, calcule un intervalo de confianza del 90% para la diferencia entre las dos calificaciones medias.",
+  "texto": "Un investigador evalúa un fármaco sobre una tarea de coordinación. Una muestra aleatoria de 9 personas lo tomó antes de la prueba y obtuvo una calificación media de 9,78 y varianza muestral de 17,64. Otra muestra aleatoria independiente de 10 personas, el grupo de control, tuvo media 15,10 y varianza muestral 27,01, respectivamente. Suponiendo poblaciones normales con varianzas iguales, calcule un intervalo de confianza del 90% para la diferencia entre las calificaciones medias.",
   "datos": {
    "n1": 9,
    "x1": 9.78,
@@ -536,12 +576,13 @@
   },
   "opciones": {
    "varianzasIguales": true
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej84",
   "tipo": "ic_dif_medias",
-  "texto": "Los profesores de la carrera de Administración de Empresas de las universidades A y B de cierta ciudad son sometidos a un examen médico. Veinte profesores de la universidad A tienen un peso medio de 72,1 kilogramos con una desviación típica de 11,3 kilogramos. Dieciocho profesores de la universidad B tienen un peso medio de 73,8 kilogramos con una desviación típica de 10,6 kilogramos. Suponiendo que estos datos pueden ser considerados muestras aleatorias independientes procedente de dos poblaciones normales con la misma varianza, calcule un intervalo de confianza del 80% para la diferencia entre las medias.",
+  "texto": "Se pesó a los entrenadores de dos clubes, A y B. Veinte entrenadores del club A tienen un peso medio de 72,1 kilogramos con desviación típica de 11,3 kilogramos. Dieciocho entrenadores del club B tienen un peso medio de 73,8 kilogramos con desviación típica de 10,6 kilogramos. Suponiendo muestras aleatorias independientes de poblaciones normales con la misma varianza, calcule un intervalo de confianza del 80% para la diferencia entre las medias.",
   "datos": {
    "n1": 20,
    "x1": 72.1,
@@ -553,12 +594,13 @@
   },
   "opciones": {
    "varianzasIguales": true
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej2.5.3",
   "tipo": "ic_dif_medias",
-  "texto": "Para una muestra aleatoria de 321 fumadores, el número medio de horas de ausentismo laboral al mes fue de 3,01 y la desviación típica fue de 1,09 horas al mes. Para una muestra aleatoria independiente de 94 trabajadores que nunca han fumado, el número medio de horas fue de 2,88 y la desviación típica muestral fue de 1,01 horas al mes. Calcule un intervalo de confianza del 95% para la diferencia entre las dos medias poblacionales.",
+  "texto": "Para una muestra aleatoria de 321 personas que consumen café, el número medio de horas extra al mes fue de 3,01 y la desviación típica de 1,09 horas. Para una muestra aleatoria independiente de 94 personas que no lo consumen, la media fue de 2,88 y la desviación típica muestral de 1,01 horas. Calcule un intervalo de confianza del 95% para la diferencia entre las medias poblacionales.",
   "datos": {
    "n1": 321,
    "x1": 3.01,
@@ -572,12 +614,13 @@
    -0.11,
    0.37
   ],
-  "tol": 0.005
+  "tol": 0.005,
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej2.5.6",
   "tipo": "ic_dif_medias",
-  "texto": "En un estudio sobre los efectos de la planificación en el rendimiento financiero de los bancos, se extrajo una muestra aleatoria de seis instituciones financieras que contaban con un sistema de planificación formal, comprobándose que el porcentaje medio anual de crecimiento de los ingresos netos en dicha muestra era de 9,972 con una desviación típica de 7,470. La media de dicho crecimiento, en otra muestra aleatoria independiente de nueve bancos que no recurrían a la planificación fue de 2,098 con una desviación típica de 10,834. Suponiendo que las dos poblaciones son normales y tienen la misma varianza, calcule un intervalo de confianza del 90% para la diferencia de medias.",
+  "texto": "En un estudio sobre inversión en publicidad, se tomó una muestra aleatoria de seis tiendas con un plan formal de marketing; su crecimiento medio anual de ventas fue de 9,972 con desviación típica de 7,470. En otra muestra aleatoria independiente de nueve tiendas sin plan, el crecimiento medio fue de 2,098 con desviación típica de 10,834. Suponiendo poblaciones normales con la misma varianza, calcule un intervalo de confianza del 90% para la diferencia de medias.",
   "datos": {
    "n1": 6,
    "x1": 9.972,
@@ -594,12 +637,13 @@
    -1.161,
    16.909
   ],
-  "tol": 0.002
+  "tol": 0.002,
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej75",
   "tipo": "ic_pareadas",
-  "texto": "La tabla de abajo muestra las pulsaciones por minuto que se registraron en 12 sujetos antes y después de haber ingerido cierta cantidad fija de una bebida alcohólica. Construya un intervalo de confianza del 95% para la diferencia promedio de las pulsaciones. Individuo 1 2 3 4 5 6 7 8 9 10 11 12 Antes 68 58 70 59 79 68 80 64 75 75 61 62 Después 80 65 80 70 88 77 90 75 87 82 70 74",
+  "texto": "Se midió el pulso (latidos por minuto) de 12 corredores antes y después de una sesión corta de ejercicio. Construya un intervalo de confianza del 95% para la diferencia promedio. Individuo 1 2 3 4 5 6 7 8 9 10 11 12 Antes 68 58 70 59 79 68 80 64 75 75 61 62 Después 80 65 80 70 88 77 90 75 87 82 70 74",
   "datos": {
    "crudos1": [
     68,
@@ -630,12 +674,13 @@
     74
    ],
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej79",
   "tipo": "ic_pareadas",
-  "texto": "La alcaldía local otorga fondos para los departamentos de medicina de nueve universidades para investigar la efectividad de dos nuevos remedios en cierto tipo de animales. Cada universidad aplica su respectivo remedio a igual número de animales y el porcentaje de efectividad se muestra como sigue: Universidad 1 2 3 4 5 6 7 8 9 Remedio 1 41 44 29 37 31 38 38 23 35 Remedio 2 38 50 33 36 40 43 45 25 31 Encuentre un intervalo de confianza de 95% para la diferencia media entre los porcentajes de efectividad de los dos tipos de remedio. Suponga que las diferencias de porcentajes de efectividad se distribuyen de forma aproximadamente normal.",
+  "texto": "Una clínica prueba dos pomadas en pacientes de nueve hospitales y registra el porcentaje de mejoría. Hospital 1 2 3 4 5 6 7 8 9 Pomada 1 41 44 29 37 31 38 38 23 35 Pomada 2 38 50 33 36 40 43 45 25 31 Encuentre un intervalo de confianza de 95% para la diferencia media de mejoría entre ambas pomadas. Suponga que las diferencias son aproximadamente normales.",
   "datos": {
    "crudos1": [
     41,
@@ -660,12 +705,13 @@
     31
    ],
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej85",
   "tipo": "ic_varianza",
-  "texto": "Una muestra de 12 bolsas de azúcar, producidas por una determinada empresa, produjo los siguientes pesos netos (medidos en libras): 12,1 12,1 11,8 11,9 11,8 12,0 12,3 11,8 12,0 11,9 12,2 11,6. Si se supone que los pesos netos se distribuyen normalmente, construya un intervalo del 95% de confianza para la varianza y la desviación estándar de la población de pesos netos de todas las bolsas de azúcar producidas por la empresa.",
+  "texto": "Una embotelladora pesó el contenido neto (en litros) de 12 bidones: 12,1 12,1 11,8 11,9 11,8 12,0 12,3 11,8 12,0 11,9 12,2 11,6. Si el contenido se distribuye normalmente, construya un intervalo del 95% de confianza para la varianza y la desviación estándar poblacional.",
   "datos": {
    "crudos": [
     12.1,
@@ -682,12 +728,13 @@
     11.6
    ],
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej87",
   "tipo": "ic_varianza",
-  "texto": "Se sabe que la exactitud de una balanza digital es del 2% en toda su escala. Una muestra de cinco lecturas del medidor sobre el mismo objeto produjo las medidas: 350, 348, 348, 352 y 351. Construya un intervalo confiable en un 95% para σ, suponiendo que la población de las medidas se distribuye normalmente.",
+  "texto": "Un termómetro digital midió cinco veces la misma muestra: 350, 348, 348, 352 y 351. Construya un intervalo confiable en un 95% para σ, suponiendo que las lecturas se distribuyen normalmente.",
   "datos": {
    "crudos": [
     350,
@@ -697,12 +744,13 @@
     351
    ],
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej88",
   "tipo": "ic_varianza",
-  "texto": "El porcentaje de lácteo presente en cierta bebida dio los registros siguientes: 0,010; 0,013; 0,018; 0,014; 0,015 y 0,013. Si se supone que tales porcentajes se distribuyen normalmente, construya un intervalo del 95% de confianza para la varianza en la población de las bebidas.",
+  "texto": "El porcentaje de grasa de una leche dio los registros: 0,010; 0,013; 0,018; 0,014; 0,015 y 0,013. Si se distribuyen normalmente, construya un intervalo del 95% de confianza para la varianza poblacional.",
   "datos": {
    "crudos": [
     0.01,
@@ -713,32 +761,35 @@
     0.013
    ],
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej91",
   "tipo": "ic_varianza",
-  "texto": "Una muestra aleatoria referida a las edades de 20 trabajadores de una empresa produce una media de x̄ = 72 y una varianza de s² = 16. Suponga que las edades se distribuyen normalmente y construya un intervalo de confianza de 98% para σ².",
+  "texto": "Una muestra aleatoria de 20 empleados arrojó una edad media de x̄ = 72 y una varianza de s² = 16. Suponga normalidad y construya un intervalo de confianza de 98% para σ².",
   "datos": {
    "n": 20,
    "s2": 16,
    "confianza": 0.98
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej94a",
   "tipo": "ic_varianza",
-  "texto": "Un científico quiere estimar la variabilidad de los niveles de azúcar producidos por determinado medicamento. Para ello extrae una muestra de 15 ratas y comprueba que la desviación típica muestral en la concentración de los niveles de azúcar es de 2,36%. Supóngase que la población es normal. (a) Calcule un intervalo de confianza del 95% para la varianza poblacional. (b) Sin hacer los cálculos, determine si un intervalo de confianza del 99% tendría una longitud mayor, menor o igual a la obtenida en el inciso (a).",
+  "texto": "Se quiere estimar la variabilidad del nivel de glucosa tras un tratamiento. Con una muestra de 15 conejos se halla una desviación típica muestral de 2,36%. Suponga población normal. (a) Calcule un intervalo de confianza del 95% para la varianza poblacional. (b) Sin calcular, ¿un intervalo del 99% sería más largo, más corto o igual?",
   "datos": {
    "n": 15,
    "s": 2.36,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej2.6.2",
   "tipo": "ic_varianza",
-  "texto": "Una muestra aleatoria de 15 tabletas para el dolor de estómago tiene una desviación típica de 0,8% en la concentración del ingrediente activo. Hállese un intervalo de confianza del 90% para la varianza y para la desviación poblacional.",
+  "texto": "Una muestra aleatoria de 15 pastillas tiene una desviación típica de 0,8% en el principio activo. Hállese un intervalo de confianza del 90% para la varianza y para la desviación poblacional.",
   "datos": {
    "n": 15,
    "s": 0.8,
@@ -748,67 +799,73 @@
    0.378,
    1.364
   ],
-  "tol": 0.002
+  "tol": 0.002,
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej95",
   "tipo": "ic_cociente",
-  "texto": "Un botánico dividió una cantidad de semillas de cierta especie de flor en dos partes y a cada una de las partes la cultivó bajo una serie diferente de condiciones experimentales. Los diámetros en milímetros de 25 flores maduras de plantas, que crecieron bajo la condición 1, dieron una varianza de 8,5. En cambio, veintiún flores maduras de plantas que crecieron bajo la condición 2 dieron una varianza de 4,25. Suponga que los datos constituyen muestras aleatorias simples independientes de dos poblaciones normalmente distribuidas y construya un intervalo de confianza del 95% para σ1²/σ2².",
+  "texto": "Se cultivaron plantas bajo dos condiciones de luz. Los diámetros de 25 plantas bajo la condición 1 dieron una varianza de 8,5; en cambio, veintiún plantas bajo la condición 2 dieron una varianza de 4,25. Suponga muestras aleatorias simples independientes de poblaciones normales y construya un intervalo de confianza del 95% para σ1²/σ2².",
   "datos": {
    "n1": 25,
    "s1sq": 8.5,
    "n2": 21,
    "s2sq": 4.25,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej97",
   "tipo": "ic_cociente",
-  "texto": "Los puntajes de una prueba de aptitud escolar tomados en una muestra aleatoria de 21 estudiantes de séptimo grado de la escuela distrital 1 y de otra muestra aleatoria de 16 estudiantes del mismo grado de la escuela distrital 2 arrojaron varianzas de s²₁ = 176 y s²₂ = 110, respectivamente. Suponga que las muestras son independientes y que las poblaciones de puntajes están normalmente distribuidas. Construya un intervalo de confianza del 90% para σ1²/σ2².",
+  "texto": "Los puntajes de un examen de matemáticas de una muestra aleatoria de 21 alumnos de la escuela 1 y de otra muestra aleatoria de 16 alumnos de la escuela 2 arrojaron varianzas de s²₁ = 176 y s²₂ = 110, respectivamente. Suponga muestras independientes y poblaciones normales. Construya un intervalo de confianza del 90% para σ1²/σ2².",
   "datos": {
    "n1": 21,
    "s1sq": 176,
    "n2": 16,
    "s2sq": 110,
    "confianza": 0.9
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej98",
   "tipo": "ic_cociente",
-  "texto": "Un equipo de profesores de educación física administró a dos grupos universitarios pruebas de resistencia después de un programa de ejercicios. Los puntajes del grupo 1, que constaba de 16 sujetos, arrojaron una varianza muestral de 4.685,40. Para el grupo 2, que constaba de 25 sujetos, la varianza muestral fue de 1.193,70. Suponiendo que los dos grupos de puntajes constituían muestras aleatorias simples independientes de poblaciones normalmente distribuidas, construya un intervalo de confianza del 95% para la razón de varianzas poblacionales para determinar si las varianzas poblacionales de ambos grupos son iguales.",
+  "texto": "Dos grupos de atletas hicieron una prueba de resistencia. Los puntajes del grupo 1, formado por 16 deportistas, dieron una varianza muestral de 4.685,40. Para el grupo 2, formado por 25 deportistas, la varianza muestral fue de 1.193,70. Suponiendo muestras aleatorias simples independientes de poblaciones normales, construya un intervalo de confianza del 95% para la razón de varianzas poblacionales.",
   "datos": {
    "n1": 16,
    "s1sq": 4685.4,
    "n2": 25,
    "s2sq": 1193.7,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej100",
   "tipo": "ic_cociente",
-  "texto": "Las estaturas (en centímetros) de 25 niñas de 12 años de edad arrojaron una varianza de 64 (centímetros al cuadrado), mientras que para otra muestra de 21 niños de idéntica edad, la varianza de sus estaturas fue de 36 (centímetros al cuadrado). Construya un intervalo de confianza del 95% para la razón entre las dos varianzas poblacionales. Interprete sus resultados.",
+  "texto": "La estatura de 25 niñas de 10 años mostró una varianza de 64 (centímetros al cuadrado), mientras que en otra muestra de 21 niños de la misma edad la varianza fue de 36. Construya un intervalo de confianza del 95% para la razón entre las dos varianzas poblacionales.",
   "datos": {
    "n1": 25,
    "s1sq": 64,
    "n2": 21,
    "s2sq": 36,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "ej101",
   "tipo": "ic_cociente",
-  "texto": "Un grupo de estadística de 21 estudiantes se subdividió en dos. Cada subgrupo utilizó durante un semestre, un método diferente. Al final de cada semestre los alumnos presentaron la misma prueba de rendimiento con los siguientes resultados: n1 = 11, s²₁ = 2,8; n2 = 10 y s²₂ = 2,0. Construya un intervalo de confianza del 90% para la razón entre las dos varianzas poblacionales. Interprete sus resultados.",
+  "texto": "Un grupo de 21 alumnos se dividió en dos y cada subgrupo usó un método de estudio distinto. Resultados de la prueba final: n1 = 11, s²₁ = 2,8; n2 = 10 y s²₂ = 2,0. Construya un intervalo de confianza del 90% para la razón entre las dos varianzas poblacionales.",
   "datos": {
    "n1": 11,
    "s1sq": 2.8,
    "n2": 10,
    "s2sq": 2,
    "confianza": 0.9
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "col_panaderia",
@@ -932,7 +989,7 @@
  {
   "id": "dm1_ingresos",
   "tipo": "dm_media",
-  "texto": "Se ha encontrado que los ingresos de un centro comercial tienen un promedio de 12,4 millones de pesos por día con desviación estándar de 2,9. Para una muestra aleatoria de 40 clientes, encuentre la probabilidad de que el ingreso promedio (a) sea menor que 13 millones de pesos. (b) exceda los 12 millones de pesos. (c) esté entre 11,5 y 13,1 millones de pesos. (d) exceda los 12,6 millones de pesos.",
+  "texto": "Las ventas diarias de una tienda tienen un promedio de 12,4 millones de pesos con desviación estándar de 2,9. Para una muestra aleatoria de 40 días, encuentre la probabilidad de que la venta promedio (a) sea menor que 13 millones. (b) exceda los 12 millones. (c) esté entre 11,5 y 13,1 millones. (d) exceda los 12,6 millones.",
   "datos": {
    "mu": 12.4,
    "sigma": 2.9,
@@ -962,12 +1019,13 @@
    0.8085,
    0.9117,
    0.3313
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm2_arroz",
   "tipo": "dm_media",
-  "texto": "Una máquina automática llena bolsas de arroz con un promedio de 16 libras por bolsa y desviación estándar de 0,5 libras. ¿Cuál es la probabilidad de que una muestra de 35 bolsas de arroz tenga una media de llenado (a) mayor que 16,1 libras? (b) Entre 15,9 y 16,1 libras?",
+  "texto": "Una máquina llena bolsas de frijol con un promedio de 16 libras y desviación estándar de 0,5 libras. ¿Cuál es la probabilidad de que una muestra de 35 bolsas tenga un llenado medio (a) mayor que 16,1 libras? (b) entre 15,9 y 16,1 libras?",
   "datos": {
    "mu": 16,
    "sigma": 0.5,
@@ -987,12 +1045,13 @@
   "probs": [
    0.1184,
    0.7632
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm3_clientes",
   "tipo": "dm_media",
-  "texto": "El número de clientes que entran diariamente a un prestigioso centro comercial se distribuye normalmente con una media de 220 y una desviación estándar de 50. Si se analiza una muestra de 12 días para estimar el número promedio de clientes que entran diariamente a ese centro comercial, encuentre la probabilidad de que la muestra produzca un promedio menor que 300 clientes.",
+  "texto": "El número de visitantes diarios de un museo se distribuye normalmente con una media de 220 y una desviación estándar de 50. Si se analiza una muestra de 12 días, encuentre la probabilidad de que el promedio de visitantes sea menor que 300.",
   "datos": {
    "mu": 220,
    "sigma": 50,
@@ -1006,12 +1065,13 @@
   ],
   "probs": [
    1
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm8_tornillos",
   "tipo": "dm_proporcion",
-  "texto": "El 5% de todos los tornillos fabricados por cierta empresa están defectuosos. Suponga que de 1.500 tornillos recién fabricados se toma una muestra aleatoria de 50 y que p representa el porcentaje de los defectuosos. (a) Describa la distribución muestral de p y encuentre μp y σp. (b) Encuentre P(p < 0,08). (c) Calcule P(0,01 < p < 0,10). (d) Determine P(p > 0,04).",
+  "texto": "El 5% de los tornillos de una fábrica sale defectuoso. De un lote de 1.500 tornillos se toma una muestra aleatoria de 50 y p representa la proporción de defectuosos en ella. (a) Describa la distribución muestral de p y encuentre μp y σp. (b) Encuentre P(p < 0,08). (c) Calcule P(0,01 < p < 0,10). (d) Determine P(p > 0,04).",
   "datos": {
    "p": 0.05,
    "n": 50
@@ -1035,12 +1095,13 @@
    0.8348,
    0.8505,
    0.6272
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm9_desempleo",
   "tipo": "dm_proporcion",
-  "texto": "Cierta ciudad europea tiene un porcentaje de desempleo de 12%. Para un estudio de 500 personas, sea p el porcentaje de desempleados en esta muestra. Encuentre: (a) P(p > 0,11) (b) P(0,11 < p < 0,13).",
+  "texto": "Una región tiene un 12% de desempleo. En un estudio de 500 personas, sea p la proporción de desempleados en la muestra. Encuentre: (a) P(p > 0,11) (b) P(0,11 < p < 0,13).",
   "datos": {
    "p": 0.12,
    "n": 500
@@ -1059,12 +1120,13 @@
   "probs": [
    0.7543,
    0.5086
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm7_fumadoras",
   "tipo": "dm_proporcion",
-  "texto": "Si la experiencia indica que un 40% de todos los clientes que entran a un determinado local son fumadoras, calcule la probabilidad de que en un grupo de 50 personas: (a) Por lo menos 25 fumen. (b) Entre 15 y 25 (ambos inclusive) fumen.",
+  "texto": "Si el 40% de los clientes de un local fuma, calcule la probabilidad de que en un grupo de 50 clientes: (a) por lo menos 25 fumen. (b) entre 15 y 25 (ambos inclusive) fumen.",
   "datos": {
    "p": 0.4,
    "n": 50
@@ -1083,24 +1145,26 @@
   "probs": [
    0.0745,
    0.851
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "cap1_hábito_1,000",
   "tipo": "ic_dif_proporciones",
-  "texto": "Una encuesta respondida por 1,000 estudiantes de un colegio A concluye que 726 no tienen hábito de lectura. En otro colegio B se realizó la misma encuesta a 760 estudiantes, concluyéndose que 240 de ellos tienen hábito de lectura. Calcule un intervalo de confianza del 95% para la diferencia entre la proporción de estudiantes que tienen hábito de lectura entre las dos encuestas. ¿Hay alguna diferencia significativa?",
+  "texto": "Una encuesta aplicada a 1,000 alumnos de una escuela A concluye que 726 no tienen hábito de lectura. En otra escuela B se aplicó la misma encuesta a 760 alumnos y 240 de ellos sí tienen hábito de lectura. Calcule un intervalo de confianza del 95% para la diferencia entre las proporciones de alumnos que tienen hábito de lectura. ¿Hay alguna diferencia significativa?",
   "datos": {
    "n1": 1000,
    "x1": 274,
    "n2": 760,
    "x2": 240,
    "confianza": 0.95
-  }
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm57_textiles",
   "tipo": "dm_dif_proporciones",
-  "texto": "Se supone que 0,16 de las industrias de un área metropolitana I son textiles. Se cree, además que, en un área metropolitana II, esta proporción es de 0,11. Si estas cifras son exactas, ¿cuál es la probabilidad de que una muestra aleatoria simple de 200 industrias del área I y una muestra aleatoria simple independiente de 225 industrias del área II arrojen una diferencia entre las proporciones muestrales mayor o igual que 0,10?",
+  "texto": "Se supone que 0,16 de las empresas de una zona norte son agrícolas y que, en una zona sur, la proporción es 0,11. Si estas cifras son exactas, ¿cuál es la probabilidad de que una muestra aleatoria simple de 200 empresas de la zona norte y otra muestra independiente de 225 de la zona sur arrojen una diferencia entre proporciones muestrales mayor o igual que 0,10?",
   "datos": {
    "p1": 0.16,
    "p2": 0.11,
@@ -1115,12 +1179,13 @@
   ],
   "probs": [
    0.0665
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm58_fumar",
   "tipo": "dm_dif_proporciones",
-  "texto": "Si el 15% de los estudiantes de una universidad A fuman y en otra B solamente el 8% lo hace, ¿cuál es la probabilidad de que una muestra aleatoria de 120 estudiantes de la universidad A y una muestra aleatoria independiente de 130 de la universidad B arrojen un valor de P barra A − P barra B igual o mayor que 0,16?",
+  "texto": "Si el 15% de los alumnos del colegio A usa lentes y en el colegio B solo el 8%, ¿cuál es la probabilidad de que una muestra aleatoria de 120 alumnos de A y una muestra aleatoria independiente de 130 de B arrojen un valor de P barra A − P barra B igual o mayor que 0,16?",
   "datos": {
    "p1": 0.15,
    "p2": 0.08,
@@ -1135,12 +1200,13 @@
   ],
   "probs": [
    0.0129
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm59_medicamentos",
   "tipo": "dm_dif_proporciones",
-  "texto": "Se cree que dos medicamentos, A y B, son igualmente efectivas para reducir el nivel de ansiedad de ciertas personas emocionalmente perturbadas. La proporción de personas en las que la droga resulta efectiva es 0,70. En una muestra aleatoria de 100 personas emocionalmente transtornadas a quienes se les suministró la droga A, 75 experimentaron una reducción del nivel de ansiedad. La droga B, por su parte, resultó efectiva en 105 personas de una muestra aleatoria independiente de 150 personas. Si las dos drogas son igualmente efectivas como uno cree, ¿cuál es la probabilidad de observar un valor de P barra A - P barra B tan grande o más de lo que aquí se nota?",
+  "texto": "Se cree que dos tratamientos, A y B, son igualmente efectivos para reducir el insomnio. La proporción de personas en las que el tratamiento resulta efectivo es 0,70. En una muestra aleatoria de 100 pacientes que recibieron el tratamiento A, 75 mejoraron. El tratamiento B resultó efectivo en 105 pacientes de una muestra aleatoria independiente de 150. Si ambos tratamientos son igual de efectivos, ¿cuál es la probabilidad de observar un valor de P barra A - P barra B tan grande o más de lo que aquí se nota?",
   "datos": {
    "p1": 0.7,
    "p2": 0.7,
@@ -1155,12 +1221,13 @@
   ],
   "probs": [
    0.199
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm63_impresoras",
   "tipo": "dm_dif_medias",
-  "texto": "Se llevan a cabo dos experimentos independientes en los que se comparan dos tipos de impresoras. Se imprimen, para el caso, 18 hojas con el tipo A y en se registra el tiempo de secado en minutos de cada una. Lo mismo se hace con el tipo B. Se sabe que la desviación estándar de la población es 1 en ambas. Suponga que el tiempo medio de secado es igual para los dos tipos de impresoras y encuentre P(X̄A − X̄B > 1), donde X̄A y X̄B son los tiempos promedios de secado para muestras de tamaño nA = nB = 18. Suponga, también, que las poblaciones en cuestión son normales.",
+  "texto": "Se comparan dos modelos de impresora en dos experimentos independientes. Se imprimen 18 hojas con el modelo A y se registra el tiempo de secado en minutos; lo mismo se hace con el modelo B. La desviación estándar poblacional es 1 en ambos. Suponga que el tiempo medio de secado es igual para los dos modelos y encuentre P(X̄A − X̄B > 1), donde X̄A y X̄B son los tiempos promedio para muestras de tamaño nA = nB = 18. Suponga poblaciones normales.",
   "datos": {
    "mu1": 0,
    "mu2": 0,
@@ -1177,12 +1244,13 @@
   ],
   "probs": [
    0.00135
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  },
  {
   "id": "dm64_baterias",
   "tipo": "dm_dif_medias",
-  "texto": "Las baterías del fabricante A tienen una duración media de 6,5 años y una desviación estándar de 0,9 años, mientras que las del fabricante B tienen una duración media de 6,0 años y una desviación estándar de 0,8 años. ¿Cuál es la probabilidad de que una muestra aleatoria de 36 baterías del fabricante A tenga una duración media que sea al menos de un año más que la duración media de una muestra de 49 baterías del fabricante B?",
+  "texto": "Las pilas del fabricante A tienen una duración media de 6,5 años y desviación estándar de 0,9 años, mientras que las del fabricante B tienen una duración media de 6,0 años y desviación estándar de 0,8 años. ¿Cuál es la probabilidad de que una muestra aleatoria de 36 pilas del fabricante A tenga una duración media de al menos un año más que la de una muestra de 49 pilas del fabricante B?",
   "datos": {
    "mu1": 6.5,
    "mu2": 6,
@@ -1199,6 +1267,7 @@
   ],
   "probs": [
    0.004
-  ]
+  ],
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
  }
 ]

@@ -135,7 +135,7 @@ function pintarPanel() {
   panelEstado.figs = figs; panelEstado.spec = spec;
   pCuerpo.innerHTML = `<p class="panel__tit">${esc(PALETAS[lang].nombre)}</p>` +
     figs.map(f => `<figure class="fig">${f.svg}<figcaption>${esc(f.titulo)}</figcaption></figure>`).join("") +
-    (ver ? `<div class="codigo"><div class="codigo__cab"><span>Script en ${lang === "python" ? "Python" : "R"}</span><button class="btn" type="button" id="copiar-codigo">Copiar</button></div><pre><code>${esc(codigoGrafica(spec, lang))}</code></pre></div>` : "");
+    (ver ? `<div class="codigo"><div class="codigo__cab"><span>${lang === "statgraphics" ? "Pasos en Statgraphics" : "Script en " + (lang === "python" ? "Python" : "R")}</span><button class="btn" type="button" id="copiar-codigo">Copiar</button></div><pre><code>${esc(codigoGrafica(spec, lang))}</code></pre></div>` : "");
 }
 
 $("#panel-cerrar").addEventListener("click", cerrarPanel);

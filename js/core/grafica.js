@@ -6,6 +6,7 @@ import { normalPdf, tPdf, chi2Pdf, fPdf, chi2Inv, fInv } from "./dist.js";
 
 export const PALETAS = {
   python: { nombre: "Python · matplotlib", curva: "#0000ff", zona: "#add8e6", zonaOp: 0.8, critico: "#ff0000", ejes: "#000000", grid: "#b0b0b0", acento: "#2563eb" },
+  statgraphics: { nombre: "Statgraphics", curva: "#cc0000", zona: "#3366cc", zonaOp: 0.5, critico: "#006600", ejes: "#000000", grid: "#c0c0c0", acento: "#b45309" },
   r: { nombre: "R · gráficos base", curva: "#0f766e", zona: "#2dd4bf", zonaOp: 0.35, critico: "#c2410c", ejes: "#000000", grid: "#cbd5e1", acento: "#0f766e" }
 };
 
@@ -46,8 +47,8 @@ function ticks(min, max, aprox = 8) {
 const W = 720, H = 470;
 
 function dibujar(o) {
-  const py = o.lang === "python", P = PALETAS[o.lang];
-  const m = { l: py ? 104 : 92, r: 26, t: 60, b: 68 };
+  const py = o.lang === "python", sg = o.lang === "statgraphics", P = PALETAS[o.lang];
+  const m = { l: py || sg ? 104 : 92, r: 26, t: 60, b: 68 };
   const pw = W - m.l - m.r, ph = H - m.t - m.b;
 
   // muestreo de la curva
@@ -65,15 +66,19 @@ function dibujar(o) {
   const menos = v => (py ? String(v).replace("-", "−") : v);
   const lab = (v, dec) => menos(v.toFixed(dec));
 
-  let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="${py ? "'DejaVu Sans', Verdana, Arial, sans-serif" : "Helvetica, Arial, sans-serif"}" role="img" aria-label="${esc(o.titulo)}">`;
-  s += `<rect width="${W}" height="${H}" fill="#ffffff"/>`;
+  let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="${py ? "'DejaVu Sans', Verdana, Arial, sans-serif" : sg ? "Arial, Helvetica, sans-serif" : "Helvetica, Arial, sans-serif"}" role="img" aria-label="${esc(o.titulo)}">`;
+  s += `<rect width="${W}" height="${H}" fill="${sg ? "#ece9d8" : "#ffffff"}"/>`;
+  if (sg) s += `<rect x="1" y="1" width="${W - 2}" height="${H - 2}" fill="none" stroke="#808080" stroke-width="2"/>`;
   s += `<defs><clipPath id="c${o.lang}${o.id}"><rect x="${m.l}" y="${m.t}" width="${pw}" height="${ph}"/></clipPath></defs>`;
 
   // rejilla
-  const dash = py ? "" : ' stroke-dasharray="2 4"';
+  const dash = py ? "" : sg ? ' stroke-dasharray="1 3"' : ' stroke-dasharray="2 4"';
   for (const v of tx.vals) s += `<line x1="${f(X(v))}" y1="${m.t}" x2="${f(X(v))}" y2="${m.t + ph}" stroke="${P.grid}" stroke-width="${py ? 1 : 1}"${dash}/>`;
   for (const v of ty.vals) s += `<line x1="${m.l}" y1="${f(Y(v))}" x2="${m.l + pw}" y2="${f(Y(v))}" stroke="${P.grid}" stroke-width="1"${dash}/>`;
 
+  if (sg) s += `<rect x="${m.l}" y="${m.t}" width="${pw}" height="${ph}" fill="#ffffff"/>`;
+  // rejilla se redibuja sobre el fondo blanco del área de trazado
+  if (sg) { for (const v of tx.vals) s += `<line x1="${f(X(v))}" y1="${m.t}" x2="${f(X(v))}" y2="${m.t + ph}" stroke="${P.grid}" stroke-dasharray="1 3"/>`; for (const v of ty.vals) s += `<line x1="${m.l}" y1="${f(Y(v))}" x2="${m.l + pw}" y2="${f(Y(v))}" stroke="${P.grid}" stroke-dasharray="1 3"/>`; }
   s += `<g clip-path="url(#c${o.lang}${o.id})">`;
   // zonas sombreadas
   for (const z of o.zonas ?? []) {
@@ -85,7 +90,7 @@ function dibujar(o) {
     s += `<polygon points="${f(X(a))},${f(Y(0))} ${pts.join(" ")} ${f(X(b))},${f(Y(0))}" fill="${P.zona}" fill-opacity="${P.zonaOp}"/>`;
   }
   // curva
-  s += `<polyline fill="none" stroke="${P.curva}" stroke-width="${py ? 4 : 3.5}" stroke-linejoin="round" points="${xs.map((x, i) => `${f(X(x))},${f(Y(ys[i]))}`).join(" ")}"/>`;
+  s += `<polyline fill="none" stroke="${P.curva}" stroke-width="${py ? 4 : sg ? 2.5 : 3.5}" stroke-linejoin="round" points="${xs.map((x, i) => `${f(X(x))},${f(Y(ys[i]))}`).join(" ")}"/>`;
   // líneas críticas
   for (const l of o.lineas ?? []) s += `<line x1="${f(X(l.x))}" y1="${m.t}" x2="${f(X(l.x))}" y2="${m.t + ph}" stroke="${P.critico}" stroke-width="2.6" stroke-dasharray="${py ? "9 5" : "10 6"}"/>`;
   s += `</g>`;
@@ -94,7 +99,7 @@ function dibujar(o) {
   for (const [i, l] of (o.lineas ?? []).entries()) {
     const izq = i === 0 && o.lineas.length > 1, x = X(l.x);
     const txt = esc(l.etq);
-    if (py) s += `<text x="${f(x + (izq ? -6 : 6))}" y="${f(Y(0.02 * ymaxD) + 5)}" fill="${P.critico}" font-size="18" text-anchor="${izq ? "end" : "start"}">${txt}</text>`;
+    if (py || sg) s += `<text x="${f(x + (izq ? -6 : 6))}" y="${f(Y(0.02 * ymaxD) + 5)}" fill="${P.critico}" font-size="18" text-anchor="${izq ? "end" : "start"}">${txt}</text>`;
     else s += `<text x="${f(x)}" y="${m.t + 20}" fill="${P.critico}" font-size="18" font-weight="bold" text-anchor="${izq ? "end" : "start"}" dx="${izq ? -6 : 6}">${txt}</text>`;
   }
 
@@ -106,12 +111,12 @@ function dibujar(o) {
   }
   for (const v of ty.vals) {
     s += `<line x1="${m.l - 7}" y1="${f(Y(v))}" x2="${m.l}" y2="${f(Y(v))}" stroke="${P.ejes}" stroke-width="1.4"/>`;
-    if (py) s += `<text x="${m.l - 12}" y="${f(Y(v) + 5)}" font-size="19" text-anchor="end" fill="#111">${lab(v, ty.dec)}</text>`;
+    if (py || sg) s += `<text x="${m.l - 12}" y="${f(Y(v) + 5)}" font-size="19" text-anchor="end" fill="#111">${lab(v, ty.dec)}</text>`;
     else s += `<text transform="translate(${m.l - 14} ${f(Y(v))}) rotate(-90)" font-size="19" text-anchor="middle" fill="#111">${lab(v, ty.dec)}</text>`;
   }
 
   // títulos
-  s += `<text x="${m.l + pw / 2}" y="${py ? 38 : 40}"${hat(o.titulo)} font-size="${py ? 24 : 25}" ${py ? "" : 'font-weight="bold"'} text-anchor="middle" fill="#111">${esc(o.titulo)}</text>`;
+  s += `<text x="${m.l + pw / 2}" y="${py ? 38 : 40}"${hat(o.titulo)} font-size="${py ? 24 : sg ? 21 : 25}" ${py ? "" : 'font-weight="bold"'} text-anchor="middle" fill="#111">${esc(o.titulo)}</text>`;
   s += `<text x="${m.l + pw / 2}" y="${H - 16}"${hat(o.xlab)} font-size="20" text-anchor="middle" fill="#111">${esc(o.xlab)}</text>`;
   s += `<text transform="translate(26 ${m.t + ph / 2}) rotate(-90)" font-size="20" text-anchor="middle" fill="#111">Densidad</text>`;
 
@@ -121,6 +126,11 @@ function dibujar(o) {
     s += `<rect x="${f(x0)}" y="${y0}" width="${f(w)}" height="38" rx="4" fill="#fff" fill-opacity="0.85" stroke="#cccccc"/>`;
     s += `<rect x="${f(x0 + 10)}" y="${y0 + 12}" width="28" height="14" fill="${P.zona}" fill-opacity="${P.zonaOp}" stroke="${P.zona}"/>`;
     s += `<text x="${f(x0 + 48)}" y="${y0 + 26}" font-size="18" fill="#111">${esc(o.leyenda)}</text>`;
+  } else if (sg && o.leyenda) {
+    const w = 40 + o.leyenda.length * 9.2, x0 = m.l + pw - w - 10, y0 = m.t + 10;
+    s += `<rect x="${f(x0)}" y="${y0}" width="${f(w)}" height="30" fill="#ffffe1" stroke="#000"/>`;
+    s += `<rect x="${f(x0 + 8)}" y="${y0 + 9}" width="16" height="12" fill="${P.zona}" fill-opacity="${P.zonaOp}" stroke="${P.zona}"/>`;
+    s += `<text x="${f(x0 + 32)}" y="${y0 + 21}" font-size="16" fill="#000">${esc(o.leyenda)}</text>`;
   } else if (!py && o.leyenda) {
     s += `<rect x="${m.l + pw - 16 - o.leyenda.length * 9.6}" y="${m.t + 40}" width="${14 + o.leyenda.length * 9.6}" height="30" rx="3" fill="#fff" fill-opacity="0.9" stroke="${P.curva}"/>`;
     s += `<text x="${m.l + pw - 22}" y="${m.t + 61}" font-size="18" text-anchor="end" fill="${P.curva}" font-weight="bold">${esc(o.leyenda)}</text>`;
@@ -181,6 +191,7 @@ export function descargarPNG(svg, nombre) {
 const num = v => String(Math.round(v * 1e6) / 1e6);
 
 export function codigo(spec, lang) {
+  if (lang === "statgraphics") return codigoStatgraphics(spec);
   if (spec.familia === "muestral") return codigoMuestral(spec, lang);
   const md = modelo(spec), P = PALETAS[lang];
   const { familia, gl, gl2, conf } = spec;
@@ -305,4 +316,23 @@ abline(v = c(${[c.a, c.b].filter(Number.isFinite).map(num).join(", ")}), col = "
     ? `import numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy import stats\n\nmu = ${num(mu)}\nsd = ${num(sd)}   # error estándar\n\n`
     : `mu <- ${num(mu)}\nsd <- ${num(sd)}   # error estándar\n\n`;
   return cab + (bloques.length ? bloques.join("\n") : "# Agrega una probabilidad por calcular para generar la gráfica.\n");
+}
+
+/* Statgraphics es de menús, no de scripts: en lugar de código se da la ruta para reproducir la gráfica. */
+function codigoStatgraphics(spec) {
+  if (spec.familia === "muestral") {
+    return `1. Describir > Distribuciones de Probabilidad > Distribuciones de Probabilidad
+2. Distribución: Normal. Media = ${num(spec.mu)}; Desv. típica = ${num(spec.sd)} (error estándar)
+3. Opciones de Tabla: marca "Cola inferior / superior" y escribe los valores de ${spec.simbolo}
+4. Opciones Gráficas: "Función de Densidad" con sombreado del área pedida
+`;
+  }
+  const nombre = { z: "Normal (media 0, desv. 1)", t: `t de Student (gl = ${spec.gl})`, chi2: `Chi-cuadrado (gl = ${spec.gl})`, f: `F (gl1 = ${spec.gl}, gl2 = ${spec.gl2})` }[spec.familia];
+  const [lo, hi] = spec.lim;
+  return `1. Describir > Distribuciones de Probabilidad > Distribuciones de Probabilidad
+2. Distribución: ${nombre}
+3. Opciones de Tabla: "Valores Críticos" con probabilidades ${num((1 - spec.conf) / 2)} y ${num(1 - (1 - spec.conf) / 2)}
+4. Opciones Gráficas: "Función de Densidad" con sombreado central
+5. Valores críticos obtenidos: ${num(lo)} y ${num(hi)}
+`;
 }

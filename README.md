@@ -47,3 +47,11 @@ Pruebas: `node tests/run.js` (añade `--v` para ver los aciertos o `--id=ej35` p
 4. [ ] Incisos «sin calcular» (¿mayor, menor o igual longitud?), nivel de confianza de un intervalo dado
 5. [ ] Conectar el modo IA (proxy gratuito / WebLLM)
 6. [ ] Gráfica de la distribución, exportar a PDF
+
+## Licencia y créditos
+- **Código:** [MIT](LICENSE). Úsalo, modifícalo y compártelo libremente.
+- **KaTeX** (MIT) va incluido en `vendor/katex/` con su licencia.
+- **Método:** las fórmulas y la organización por tipos de intervalo siguen el libro *Estadística inferencial* de
+  Llinás Solano (Cap. 2, Tablas C.5–C.8), que se cita como fuente. Este proyecto no está afiliado a sus autores.
+- **Enunciados de prueba (`tests/banco.json`):** son redacciones propias; no reproducen textos del libro ni de materiales de clase.
+- Proyecto personal, gratuito y con fines de aprendizaje. Los resultados no sustituyen la revisión de un docente.

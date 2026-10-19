@@ -118,6 +118,7 @@ function solucionHtml(r) {
       ${r.grafica ? `<div class="graf-btns">
         <button class="btn btn--py" type="button" data-grafica="python"><span aria-hidden="true">📈</span> Gráfica Python</button>
         <button class="btn btn--r" type="button" data-grafica="r"><span aria-hidden="true">📊</span> Gráfica R</button>
+        <button class="btn btn--sg" type="button" data-grafica="statgraphics"><span aria-hidden="true">📉</span> Gráfica Statgraphics</button>
       </div>` : ""}</div>`;
 }
 
