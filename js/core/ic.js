@@ -5,6 +5,7 @@
 //               intervalo:{inf, sup, simbolo}, extra?, conclusion }
 
 import { zCrit, tCrit, chi2Crit, fCrit } from "./dist.js";
+import { dv } from "./formato.js";   // \dato{…}: marca los datos del enunciado (en rojo en el PDF)
 
 /* ---------- utilidades ---------- */
 export const redondear = (x, d = 4) => Math.round((x + Number.EPSILON) * 10 ** d) / 10 ** d;
@@ -18,8 +19,9 @@ export function resumen(arr) {
 }
 
 function nivel(d) {
-  const conf = d.confianza;
-  if (!(conf > 0 && conf < 1)) throw new Error("Falta el nivel de confianza (por ejemplo 95 %).");
+  // α y confianza son lo mismo: basta con uno de los dos (conf = 1 − α)
+  const conf = d.confianza ?? (d.alfa > 0 && d.alfa < 1 ? 1 - d.alfa : undefined);
+  if (!(conf > 0 && conf < 1)) throw new Error("Falta el nivel de confianza o de significancia (por ejemplo 95 % o α = 0,05).");
   const alfa = 1 - conf;
   return { conf, alfa, a2: alfa / 2 };
 }
@@ -76,8 +78,8 @@ export function icMedia(d, o = {}) {
   }
 
   pasos.push({ titulo: "Datos", lineas: [
-    `n = ${n},\\quad \\bar{x} = ${f(xbar)},\\quad ${sigmaConocida ? "\\sigma" : "s"} = ${f(desv)}`,
-    `1-\\alpha = ${f(conf)} \\Rightarrow \\alpha = ${f(alfa)},\\quad \\alpha/2 = ${f(a2)}`
+    `n = ${dv(n)},\\quad \\bar{x} = ${dv(xbar)},\\quad ${sigmaConocida ? "\\sigma" : "s"} = ${dv(desv)}`,
+    `1-\\alpha = ${dv(conf)} \\Rightarrow \\alpha = ${f(alfa)},\\quad \\alpha/2 = ${f(a2)}`
   ]});
 
   const razon = sigmaConocida
@@ -94,10 +96,10 @@ export function icMedia(d, o = {}) {
   const error = crit * desv / Math.sqrt(n);
   const inf = xbar - error, sup = xbar + error;
   pasos.push({ titulo: "Error de estimación", lineas: [
-    `E = ${usaZ ? "z" : "t"}_{\\alpha/2}\\dfrac{${sigmaConocida ? "\\sigma" : "s"}}{\\sqrt{n}} = ${f(crit)}\\cdot\\dfrac{${f(desv)}}{\\sqrt{${n}}} = ${f(error)}`
+    `E = ${usaZ ? "z" : "t"}_{\\alpha/2}\\dfrac{${sigmaConocida ? "\\sigma" : "s"}}{\\sqrt{n}} = ${f(crit)}\\cdot\\dfrac{${dv(desv)}}{\\sqrt{${dv(n)}}} = ${f(error)}`
   ]});
   pasos.push({ titulo: "Intervalo", lineas: [
-    `${f(xbar)} - ${f(error)} < \\mu < ${f(xbar)} + ${f(error)}`,
+    `${dv(xbar)} - ${f(error)} < \\mu < ${dv(xbar)} + ${f(error)}`,
     `${f(inf)} < \\mu < ${f(sup)}`
   ]});
 
@@ -126,8 +128,8 @@ export function icProporcion(d) {
 
   const pasos = [
     { titulo: "Datos", lineas: [
-      x !== undefined ? `n = ${n},\\quad x = ${x} \\Rightarrow \\hat{p} = \\dfrac{x}{n} = ${f(p)}` : `n = ${n},\\quad \\hat{p} = ${f(p)}`,
-      `1-\\alpha = ${f(conf)} \\Rightarrow \\alpha/2 = ${f(a2)}`
+      x !== undefined ? `n = ${dv(n)},\\quad x = ${dv(x)} \\Rightarrow \\hat{p} = \\dfrac{x}{n} = ${f(p)}` : `n = ${dv(n)},\\quad \\hat{p} = ${dv(p)}`,
+      `1-\\alpha = ${dv(conf)} \\Rightarrow \\alpha/2 = ${f(a2)}`
     ]},
     { titulo: "Verificar condiciones", lineas: [`n = ${n} ${n >= 30 ? "\\geq 30" : "<30"};\\; n\\hat{p} = ${f(n * p, 2)},\\; n(1-\\hat{p}) = ${f(n * (1 - p), 2)}`],
       texto: cond ? "Se cumple la condición para usar la aproximación normal." : "⚠ No se cumple la condición de muestra grande: el intervalo puede no ser confiable." },
@@ -159,8 +161,8 @@ export function icDifProporciones(d) {
   const dif = p1 - p2, error = z * ee, inf = dif - error, sup = dif + error;
   const pasos = [
     { titulo: "Datos", lineas: [
-      `n_1 = ${d.n1},\\; \\hat{p}_1 = ${f(p1)}\\qquad n_2 = ${d.n2},\\; \\hat{p}_2 = ${f(p2)}`,
-      `1-\\alpha = ${f(conf)} \\Rightarrow \\alpha/2 = ${f(a2)}`
+      `n_1 = ${dv(d.n1)},\\; \\hat{p}_1 = ${dv(p1)}\\qquad n_2 = ${dv(d.n2)},\\; \\hat{p}_2 = ${dv(p2)}`,
+      `1-\\alpha = ${dv(conf)} \\Rightarrow \\alpha/2 = ${f(a2)}`
     ]},
     { titulo: "Valor crítico", lineas: [`z_{${f(a2)}} = ${f(z)}`] },
     { titulo: "Error estándar", lineas: [
@@ -196,9 +198,9 @@ export function icDifMedias(d, o = {}) {
   if ([v1, v2].some(Number.isNaN)) throw new Error("Faltan datos: s₁ y s₂ (o σ₁ y σ₂)");
   const dif = x1 - x2;
   pasos.push({ titulo: "Datos", lineas: [
-    `n_1=${n1},\\ \\bar{x}_1=${f(x1)},\\ ${conocidas ? "\\sigma_1" : "s_1"}=${f(Math.sqrt(v1))}`,
-    `n_2=${n2},\\ \\bar{x}_2=${f(x2)},\\ ${conocidas ? "\\sigma_2" : "s_2"}=${f(Math.sqrt(v2))}`,
-    `1-\\alpha=${f(conf)} \\Rightarrow \\alpha/2=${f(a2)}`
+    `n_1=${dv(n1)},\\ \\bar{x}_1=${dv(x1)},\\ ${conocidas ? "\\sigma_1" : "s_1"}=${dv(Math.sqrt(v1))}`,
+    `n_2=${dv(n2)},\\ \\bar{x}_2=${dv(x2)},\\ ${conocidas ? "\\sigma_2" : "s_2"}=${dv(Math.sqrt(v2))}`,
+    `1-\\alpha=${dv(conf)} \\Rightarrow \\alpha/2=${f(a2)}`
   ]});
 
   let letra, formula, crit, ee, gl = null, razon, usaZ;
@@ -236,7 +238,7 @@ export function icDifMedias(d, o = {}) {
     throw e;
   }
   const error = crit * ee, inf = dif - error, sup = dif + error;
-  pasos.push({ titulo: "Intervalo", lineas: [`(${f(x1)}-${f(x2)}) \\pm ${f(crit)}\\cdot ${f(ee, 5)}`, `${f(inf)} < \\mu_1-\\mu_2 < ${f(sup)}`] });
+  pasos.push({ titulo: "Intervalo", lineas: [`(${dv(x1)}-${dv(x2)}) \\pm ${f(crit)}\\cdot ${f(ee, 5)}`, `${f(inf)} < \\mu_1-\\mu_2 < ${f(sup)}`] });
 
   return {
     id: "ic_dif_medias", tema: "Intervalo de confianza para la diferencia de dos medias", tabla: `C.7-${letra}`, formula,
@@ -276,7 +278,7 @@ export function icVarianza(d, o = {}) {
   const gl = n - 1;
   const cUp = chi2Crit(a2, gl), cLow = chi2Crit(1 - a2, gl);
   const inf = gl * s2 / cUp, sup = gl * s2 / cLow;
-  pasos.push({ titulo: "Datos", lineas: [`n=${n},\\quad s^2=${f(s2)},\\quad \\nu=n-1=${gl}`, `1-\\alpha=${f(conf)} \\Rightarrow \\alpha/2=${f(a2)}`] });
+  pasos.push({ titulo: "Datos", lineas: [`n=${dv(n)},\\quad s^2=${dv(s2)},\\quad \\nu=n-1=${gl}`, `1-\\alpha=${dv(conf)} \\Rightarrow \\alpha/2=${f(a2)}`] });
   pasos.push({ titulo: "Valores críticos χ²", lineas: [`\\chi^2_{${f(a2)},\\,${gl}} = ${f(cUp)},\\qquad \\chi^2_{${f(1 - a2)},\\,${gl}} = ${f(cLow)}`] });
   pasos.push({ titulo: "Intervalo para σ²", lineas: [`\\dfrac{(${n}-1)(${f(s2)})}{${f(cUp)}} < \\sigma^2 < \\dfrac{(${n}-1)(${f(s2)})}{${f(cLow)}}`, `${f(inf)} < \\sigma^2 < ${f(sup)}`] });
   const res = {
@@ -305,7 +307,7 @@ export function icCociente(d) {
   const fA = fCrit(a2, g1, g2), fB = fCrit(a2, g2, g1);
   const r = v1 / v2, inf = r / fA, sup = r * fB;
   const pasos = [
-    { titulo: "Datos", lineas: [`n_1=${d.n1},\\ s_1^2=${f(v1)}\\qquad n_2=${d.n2},\\ s_2^2=${f(v2)}`, `\\nu_1=${g1},\\ \\nu_2=${g2}`, `1-\\alpha=${f(conf)} \\Rightarrow \\alpha/2=${f(a2)}`] },
+    { titulo: "Datos", lineas: [`n_1=${dv(d.n1)},\\ s_1^2=${dv(v1)}\\qquad n_2=${dv(d.n2)},\\ s_2^2=${dv(v2)}`, `\\nu_1=${g1},\\ \\nu_2=${g2}`, `1-\\alpha=${dv(conf)} \\Rightarrow \\alpha/2=${f(a2)}`] },
     { titulo: "Valores críticos F", lineas: [`F_{${f(a2)}}(${g1},${g2}) = ${f(fA)},\\qquad F_{${f(a2)}}(${g2},${g1}) = ${f(fB)}`] },
     { titulo: "Cociente muestral", lineas: [`\\dfrac{s_1^2}{s_2^2} = \\dfrac{${f(v1)}}{${f(v2)}} = ${f(r)}`] },
     { titulo: "Intervalo", lineas: [`\\dfrac{${f(r)}}{${f(fA)}} < \\dfrac{\\sigma_1^2}{\\sigma_2^2} < ${f(r)}\\cdot ${f(fB)}`, `${f(inf)} < \\dfrac{\\sigma_1^2}{\\sigma_2^2} < ${f(sup)}`] }

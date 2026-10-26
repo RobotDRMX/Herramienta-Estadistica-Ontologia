@@ -1269,5 +1269,522 @@
    0.004
   ],
   "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 2)."
+ },
+ {
+  "id": "ph_dm_z_s",
+  "tipo": "ph_dif_medias",
+  "texto": "En una encuesta a 186 matemáticos hombres la confianza media fue de 4,059 con desviación estándar de 0,839; en 172 mujeres la media fue de 3,68 con desviación estándar de 0,966. Con un nivel de significancia del 5 %, ¿hay evidencia de que las medias poblacionales son diferentes?",
+  "datos": {
+   "alfa": 0.05,
+   "n1": 186,
+   "x1": 4.059,
+   "s1": 0.839,
+   "n2": 172,
+   "x2": 3.68,
+   "s2": 0.966
+  },
+  "opciones": {
+   "cola": "dos"
+  },
+  "prueba": {
+   "est": 3.9492,
+   "criticos": [
+    -1.96,
+    1.96
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "ph_dm_z_sigma",
+  "tipo": "ph_dif_medias",
+  "texto": "Se tomó una muestra de 25 estudiantes del grupo 1 con media de 78 y otra de 15 estudiantes del grupo 2 con media de 85. Las poblaciones son normales con σ₁ = 9 y σ₂ = 5. Con un nivel de significancia del 5 %, determine si es posible concluir que la media del grupo 1 es inferior a la del grupo 2.",
+  "datos": {
+   "alfa": 0.05,
+   "n1": 25,
+   "x1": 78,
+   "sigma1": 9,
+   "n2": 15,
+   "x2": 85,
+   "sigma2": 5
+  },
+  "opciones": {
+   "cola": "izq"
+  },
+  "prueba": {
+   "est": -3.1601,
+   "criticos": [
+    -1.6449
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "ph_dm_t_comb",
+  "tipo": "ph_dif_medias",
+  "texto": "El grupo 1 (n = 4) generó una media de 78 ideas con desviación estándar de 24,4 y el grupo 2 (n = 4) una media de 63,5 con desviación estándar de 20,2. Las poblaciones son normales con varianzas iguales. Al nivel del 10 %, ¿el grupo 1 genera más ideas en promedio?",
+  "datos": {
+   "alfa": 0.1,
+   "n1": 4,
+   "x1": 78,
+   "s1": 24.4,
+   "n2": 4,
+   "x2": 63.5,
+   "s2": 20.2
+  },
+  "opciones": {
+   "cola": "der",
+   "varianzasIguales": true
+  },
+  "prueba": {
+   "est": 0.9155,
+   "criticos": [
+    1.4398
+   ],
+   "rechaza": false
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "ph_var_chi2",
+  "tipo": "ph_varianza",
+  "texto": "La varianza en el porcentaje de impurezas de las remesas de un producto químico no supera el 4 %. Una muestra aleatoria de 20 remesas dio una varianza de 5,62. Al nivel de significancia del 10 %, ¿hay evidencia de que la varianza es mayor? Suponga población normal.",
+  "datos": {
+   "alfa": 0.1,
+   "n": 20,
+   "ssq": 5.62,
+   "sigma0sq": 4
+  },
+  "opciones": {
+   "cola": "der"
+  },
+  "prueba": {
+   "est": 26.695,
+   "criticos": [
+    27.2036
+   ],
+   "rechaza": false
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "ph_var_desv",
+  "tipo": "ph_varianza",
+  "texto": "Un fabricante asegura que la desviación estándar del peso de sus paquetes es de 2 g. En una muestra de 15 paquetes la desviación estándar fue 2,8 g. Con un nivel de significancia del 5 %, ¿hay evidencia de que la desviación estándar es diferente de 2 g?",
+  "datos": {
+   "alfa": 0.05,
+   "n": 15,
+   "s": 2.8,
+   "sigma0sq": 4
+  },
+  "opciones": {
+   "cola": "dos"
+  },
+  "prueba": {
+   "est": 27.44,
+   "criticos": [
+    5.6287,
+    26.1189
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "ph_coc_f",
+  "tipo": "ph_cociente",
+  "texto": "Se compararon dos tipos de bonos. Para 17 bonos del primer tipo la varianza muestral fue 123,35 y para 11 bonos del segundo tipo la varianza muestral fue 8,02. Al nivel del 2 %, determine si las dos varianzas poblacionales son diferentes. Asuma poblaciones normales.",
+  "datos": {
+   "alfa": 0.02,
+   "n1": 17,
+   "s1sq": 123.35,
+   "n2": 11,
+   "s2sq": 8.02
+  },
+  "opciones": {
+   "cola": "dos"
+  },
+  "prueba": {
+   "est": 15.3803,
+   "criticos": [
+    0.2705,
+    4.5204
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "ph_corr_t",
+  "tipo": "ph_correlacion",
+  "texto": "En 49 países se obtuvo un coeficiente de correlación muestral de 0,43 entre la inestabilidad política y la inflación. Con un nivel de significancia de 0,005, ¿existe una correlación positiva entre ambas variables?",
+  "datos": {
+   "alfa": 0.005,
+   "n": 49,
+   "r": 0.43
+  },
+  "opciones": {
+   "cola": "der"
+  },
+  "prueba": {
+   "est": 3.2652,
+   "criticos": [
+    2.6846
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "ph_corr_fisher",
+  "tipo": "ph_correlacion",
+  "texto": "Con 20 observaciones se obtuvo r = 0,733 entre el nitrógeno que entra y el porcentaje que se elimina. Al nivel de 5 %, pruebe si la correlación poblacional es mayor que 0,5.",
+  "datos": {
+   "alfa": 0.05,
+   "n": 20,
+   "r": 0.733,
+   "rho0": 0.5
+  },
+  "opciones": {
+   "cola": "der"
+  },
+  "prueba": {
+   "est": 1.591,
+   "criticos": [
+    1.6449
+   ],
+   "rechaza": false
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "rl_presion",
+  "tipo": "rl_simple",
+  "texto": "Se midió la temperatura de ebullición del agua (°F) y la presión (in Hg) en 17 puntos. Ajuste la recta de regresión lineal simple de la presión sobre la temperatura. Temperatura: 194.5 194.3 197.9 198.4 199.4 199.9 200.9 201.1 201.4 201.3 203.6 204.6 209.5 208.6 210.7 211.9 212.2. Presión: 20.79 20.79 22.4 22.67 23.15 23.35 23.89 23.99 24.02 24.01 25.14 26.57 28.49 27.76 29.04 29.88 30.06.",
+  "datos": {},
+  "regresion": {
+   "b0": -81.0637,
+   "b1": 0.5229,
+   "r": 0.9972,
+   "r2": 0.9944
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "rl_ventas",
+  "tipo": "rl_simple",
+  "texto": "Una empresa registró su inversión en publicidad (miles de $): 75 80 85 65 60 55 60 85 y sus ventas (millones de $): 24 18 16 15 12 10 12 28. Halle la recta de regresión y estime las ventas cuando la inversión en publicidad sea de 70.",
+  "datos": {
+   "x0": 70
+  },
+  "regresion": {
+   "b0": -11.5046,
+   "b1": 0.4018,
+   "r": 0.7748,
+   "r2": 0.6003
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3 y 6)."
+ },
+ {
+  "id": "ph_prop_mitad",
+  "tipo": "ph_proporcion",
+  "texto": "Una tienda registró que 378 de 802 compradores pagaron con tarjeta de crédito. Con un nivel de significancia del 10 %, ¿hay evidencia de que menos de la mitad de los compradores paga con tarjeta?",
+  "datos": {
+   "alfa": 0.1,
+   "n": 802,
+   "x": 378,
+   "p0": 0.5
+  },
+  "opciones": {
+   "cola": "izq"
+  },
+  "prueba": {
+   "est": -1.6246,
+   "criticos": [
+    -1.2816
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_prop_lo_sumo",
+  "tipo": "ph_proporcion",
+  "texto": "Una fábrica afirma que a lo sumo el 8 % de sus piezas son defectuosas. En una muestra de 200 piezas se hallaron 22 defectuosas. Con α = 0,05, ¿hay evidencia de que la proporción es mayor?",
+  "datos": {
+   "alfa": 0.05,
+   "n": 200,
+   "x": 22,
+   "p0": 0.08
+  },
+  "opciones": {
+   "cola": "der"
+  },
+  "prueba": {
+   "est": 1.5639,
+   "criticos": [
+    1.6449
+   ],
+   "rechaza": false
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_dprop_auto",
+  "tipo": "ph_dif_proporciones",
+  "texto": "En una universidad 34 de 100 hombres y 27 de 100 mujeres tienen auto en el campus. El rector afirma que la proporción de hombres con auto es mayor que la de mujeres. Con un nivel de significancia del 5 %, ¿hay evidencia a favor del rector?",
+  "datos": {
+   "alfa": 0.05,
+   "n1": 100,
+   "x1": 34,
+   "n2": 100,
+   "x2": 27
+  },
+  "opciones": {
+   "cola": "der"
+  },
+  "prueba": {
+   "est": 1.0752,
+   "criticos": [
+    1.6449
+   ],
+   "rechaza": false
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_dprop_revistas",
+  "tipo": "ph_dif_proporciones",
+  "texto": "En las revistas colombianas 52 de 203 anuncios son deportivos y en las brasileñas 56 de 270. Con α = 0,05, ¿son diferentes las proporciones de anuncios deportivos?",
+  "datos": {
+   "alfa": 0.05,
+   "n1": 203,
+   "x1": 52,
+   "n2": 270,
+   "x2": 56
+  },
+  "opciones": {
+   "cola": "dos"
+  },
+  "prueba": {
+   "est": 1.2503,
+   "criticos": [
+    -1.96,
+    1.96
+   ],
+   "rechaza": false
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_dprop_trat",
+  "tipo": "ph_dif_proporciones",
+  "texto": "En un estudio, 45 de 120 pacientes con el tratamiento A mejoraron y 30 de 110 con el tratamiento B mejoraron. Con un nivel de significancia del 5 %, ¿hay evidencia de que la proporción de mejoría es mayor con A que con B?",
+  "datos": {
+   "alfa": 0.05,
+   "n1": 120,
+   "x1": 45,
+   "n2": 110,
+   "x2": 30
+  },
+  "opciones": {
+   "cola": "der"
+  },
+  "prueba": {
+   "est": 1.6528,
+   "criticos": [
+    1.6449
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_media_t",
+  "tipo": "ph_media",
+  "texto": "Una muestra de 16 baterías tiene una vida media de 48 horas con desviación estándar de 5. Con α = 0,05, ¿hay evidencia de que la vida media poblacional es menor que 50 horas?",
+  "datos": {
+   "alfa": 0.05,
+   "n": 16,
+   "xbar": 48,
+   "s": 5,
+   "mu0": 50
+  },
+  "opciones": {
+   "cola": "izq"
+  },
+  "prueba": {
+   "est": -1.6,
+   "criticos": [
+    -1.7531
+   ],
+   "rechaza": false
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_media_z",
+  "tipo": "ph_media",
+  "texto": "Una muestra de 40 focos tiene una vida media de 800 h y una desviación estándar de 40 h. El fabricante afirma que la vida media es de 790 h. Con α = 0,05, ¿hay evidencia de que es mayor?",
+  "datos": {
+   "alfa": 0.05,
+   "n": 40,
+   "xbar": 800,
+   "s": 40,
+   "mu0": 790
+  },
+  "opciones": {
+   "cola": "der"
+  },
+  "prueba": {
+   "est": 1.5811,
+   "criticos": [
+    1.6449
+   ],
+   "rechaza": false
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_pareadas_tiempos",
+  "tipo": "ph_pareadas",
+  "texto": "Antes y después de un entrenamiento, 10 atletas midieron su tiempo: 12 11 13 12 14 13 12 15 13 12 y 11 10 12 11 13 12 11 13 12 11. Con α = 0,05, ¿mejoró el tiempo?",
+  "datos": {
+   "alfa": 0.05,
+   "crudos1": [
+    12,
+    11,
+    13,
+    12,
+    14,
+    13,
+    12,
+    15,
+    13,
+    12
+   ],
+   "crudos2": [
+    11,
+    10,
+    12,
+    11,
+    13,
+    12,
+    11,
+    13,
+    12,
+    11
+   ]
+  },
+  "opciones": {
+   "cola": "der"
+  },
+  "prueba": {
+   "est": 11,
+   "criticos": [
+    1.8331
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_pend_resumen",
+  "tipo": "ph_pendiente",
+  "texto": "Se estimó una recta con n=12 y pendiente b1=3 con error típico 1,1. Al nivel α=0.05 pruebe si la pendiente es distinta de cero.",
+  "datos": {
+   "alfa": 0.05,
+   "n": 12,
+   "b1": 3,
+   "seb1": 1.1
+  },
+  "opciones": {
+   "cola": "dos"
+  },
+  "prueba": {
+   "est": 2.7273,
+   "criticos": [
+    -2.2281,
+    2.2281
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_pend_duplicado",
+  "tipo": "ph_pendiente",
+  "texto": "Con n=12 observaciones se ajustó una regresión lineal y se obtuvo una pendiente b1=3b1=3 con error típico 1,1. Con α=0.05α=0.05, ¿es significativa la pendiente?",
+  "datos": {
+   "alfa": 0.05,
+   "n": 12,
+   "b1": 3,
+   "seb1": 1.1
+  },
+  "opciones": {
+   "cola": "dos"
+  },
+  "prueba": {
+   "est": 2.7273,
+   "criticos": [
+    -2.2281,
+    2.2281
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ph_pend_listas",
+  "tipo": "ph_pendiente",
+  "texto": "Una empresa registró su inversión en publicidad (miles de $): 75 80 85 65 60 55 60 85 y sus ventas (millones de $): 24 18 16 15 12 10 12 28. Ajuste la regresión lineal simple de las ventas y, con α = 0,05, pruebe si la pendiente es distinta de cero.",
+  "datos": {
+   "alfa": 0.05
+  },
+  "opciones": {
+   "cola": "dos"
+  },
+  "prueba": {
+   "est": 3.0018,
+   "criticos": [
+    -2.4469,
+    2.4469
+   ],
+   "rechaza": true
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ic_n_observaciones",
+  "tipo": "ic_media",
+  "texto": "Estime con α=0.05 la media si en 40 observaciones el promedio fue 100 y la desviación estándar muestral fue 8.",
+  "datos": {
+   "n": 40,
+   "xbar": 100,
+   "s": 8,
+   "confianza": 0.95
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "ic_alfa_duplicado",
+  "tipo": "ic_proporcion",
+  "texto": "Con α=0.05α=0.05 estime la proporción si 30 de 100 personas aprobaron.",
+  "datos": {
+   "x": 30,
+   "n": 100,
+   "confianza": 0.95
+  },
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
+ },
+ {
+  "id": "amb_intervalo_y_prueba",
+  "tipo": null,
+  "pregunta": true,
+  "texto": "Construya un intervalo de confianza del 95 % para la media (n = 25, x̄ = 10, s = 2) y pruebe la hipótesis de que la media es 9.",
+  "datos": {},
+  "fuente": "Enunciado original; método según Llinás Solano, Estadística inferencial (Cap. 3)."
  }
 ]

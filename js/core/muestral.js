@@ -8,6 +8,7 @@
 import { normalizar, tokenizar } from "./texto.js";
 import { interpretar as interpretarIC } from "./roles.js";
 import { normalCdf } from "./dist.js";
+import { dv } from "./formato.js";
 
 export const TIPOS_DM = {
   dm_media: "Distribución muestral de la media (probabilidad)",
@@ -205,7 +206,7 @@ export function resolverMuestral(tipo, d, opciones = {}, consultas = []) {
 
   if (tipo === "dm_media") {
     const { n } = d; ee = d.sigma / Math.sqrt(n); centro = d.mu;
-    pasos.push({ titulo: "Datos", lineas: [`\\mu = ${f(d.mu)},\\quad \\sigma = ${f(d.sigma)},\\quad n = ${n}`] });
+    pasos.push({ titulo: "Datos", lineas: [`\\mu = ${dv(d.mu)},\\quad \\sigma = ${dv(d.sigma)},\\quad n = ${dv(n)}`] });
     const ok = n >= 30 || opciones.normal;
     pasos.push({ titulo: "Verificar el modelo", lineas: [], texto: ok ? (n >= 30 ? "n ≥ 30: por el teorema del límite central x̄ es aproximadamente normal." : "La población es normal: x̄ es normal para cualquier n.") : "⚠ n < 30 y no se dice que la población sea normal: con estos datos no se puede asegurar que x̄ sea normal." });
     if (!ok) advertencias.push("n < 30 sin población normal: la probabilidad calculada no está garantizada.");
@@ -213,7 +214,7 @@ export function resolverMuestral(tipo, d, opciones = {}, consultas = []) {
     formula = "Z = \\dfrac{\\bar{X}-\\mu}{\\sigma/\\sqrt{n}}"; supuestos = ["Población normal, o n ≥ 30"];
   } else if (tipo === "dm_proporcion") {
     const { n } = d; ee = Math.sqrt(d.p * (1 - d.p) / n); centro = d.p;
-    pasos.push({ titulo: "Datos", lineas: [`p = ${f(d.p)},\\quad n = ${n}`] });
+    pasos.push({ titulo: "Datos", lineas: [`p = ${dv(d.p)},\\quad n = ${dv(n)}`] });
     const ok = n * d.p >= 5 && n * (1 - d.p) >= 5;
     pasos.push({ titulo: "Verificar el modelo", lineas: [`np = ${f(n * d.p, 3)},\\quad n(1-p) = ${f(n * (1 - d.p), 3)}`], texto: ok ? "np ≥ 5 y n(1−p) ≥ 5: p̂ es aproximadamente normal." : "⚠ No se cumplen np ≥ 5 y n(1−p) ≥ 5: la aproximación normal no es fiable." });
     if (!ok) advertencias.push("No se cumple np ≥ 5 y n(1−p) ≥ 5.");
@@ -221,7 +222,7 @@ export function resolverMuestral(tipo, d, opciones = {}, consultas = []) {
     formula = "Z = \\dfrac{\\hat{p}-p}{\\sqrt{p(1-p)/n}}"; supuestos = ["np ≥ 5 y n(1−p) ≥ 5"];
   } else if (tipo === "dm_dif_medias") {
     centro = d.mu1 - d.mu2; ee = Math.sqrt(d.sigma1 ** 2 / d.n1 + d.sigma2 ** 2 / d.n2);
-    pasos.push({ titulo: "Datos", lineas: [`\\mu_1 = ${f(d.mu1)},\\ \\sigma_1 = ${f(d.sigma1)},\\ n_1 = ${d.n1}`, `\\mu_2 = ${f(d.mu2)},\\ \\sigma_2 = ${f(d.sigma2)},\\ n_2 = ${d.n2}`] });
+    pasos.push({ titulo: "Datos", lineas: [`\\mu_1 = ${dv(d.mu1)},\\ \\sigma_1 = ${dv(d.sigma1)},\\ n_1 = ${dv(d.n1)}`, `\\mu_2 = ${dv(d.mu2)},\\ \\sigma_2 = ${dv(d.sigma2)},\\ n_2 = ${dv(d.n2)}`] });
     const ok = (d.n1 >= 30 && d.n2 >= 30) || opciones.normal;
     pasos.push({ titulo: "Verificar el modelo", lineas: [], texto: ok ? "Muestras independientes y poblaciones normales (o n₁, n₂ ≥ 30): la diferencia de medias es normal." : "⚠ Alguna muestra es pequeña y no se dice que las poblaciones sean normales." });
     if (!ok) advertencias.push("Muestras pequeñas sin poblaciones normales.");
@@ -232,7 +233,7 @@ export function resolverMuestral(tipo, d, opciones = {}, consultas = []) {
     formula = "Z = \\dfrac{(\\bar{X}_1-\\bar{X}_2)-(\\mu_1-\\mu_2)}{\\sqrt{\\sigma_1^2/n_1+\\sigma_2^2/n_2}}"; supuestos = ["Muestras independientes", "Poblaciones normales, o n₁, n₂ ≥ 30"];
   } else {
     centro = d.p1 - d.p2; ee = Math.sqrt(d.p1 * (1 - d.p1) / d.n1 + d.p2 * (1 - d.p2) / d.n2);
-    pasos.push({ titulo: "Datos", lineas: [`p_1 = ${f(d.p1)},\\ n_1 = ${d.n1}`, `p_2 = ${f(d.p2)},\\ n_2 = ${d.n2}`] });
+    pasos.push({ titulo: "Datos", lineas: [`p_1 = ${dv(d.p1)},\\ n_1 = ${dv(d.n1)}`, `p_2 = ${dv(d.p2)},\\ n_2 = ${dv(d.n2)}`] });
     const ok = [[d.n1, d.p1], [d.n2, d.p2]].every(([n, p]) => n * p >= 5 && n * (1 - p) >= 5);
     pasos.push({ titulo: "Verificar el modelo", lineas: [`n_1p_1 = ${f(d.n1 * d.p1, 2)},\\ n_1q_1 = ${f(d.n1 * (1 - d.p1), 2)},\\ n_2p_2 = ${f(d.n2 * d.p2, 2)},\\ n_2q_2 = ${f(d.n2 * (1 - d.p2), 2)}`], texto: ok ? "Los cuatro productos son ≥ 5: la diferencia de proporciones es aproximadamente normal." : "⚠ Algún producto np o n(1−p) es menor que 5: la aproximación normal no es fiable." });
     if (!ok) advertencias.push("Algún producto np o n(1−p) es menor que 5.");
@@ -251,15 +252,15 @@ export function resolverMuestral(tipo, d, opciones = {}, consultas = []) {
     if (c.op === "menor") {
       const zz = z(c.a); p = normalCdf(zz);
       enunciado = `P(${v} < ${f(c.a)})`;
-      lineas = [`P(${v} < ${f(c.a)}) = P\\left(Z < \\dfrac{${f(c.a)}-${f(centro)}}{${f(ee, 5)}}\\right) = P(Z < ${f(zz)}) ${prob(p)}`];
+      lineas = [`P(${v} < ${dv(c.a)}) = P\\left(Z < \\dfrac{${dv(c.a)}-${f(centro)}}{${f(ee, 5)}}\\right) = P(Z < ${f(zz)}) ${prob(p)}`];
     } else if (c.op === "mayor") {
       const zz = z(c.a); p = 1 - normalCdf(zz);
       enunciado = `P(${v} > ${f(c.a)})`;
-      lineas = [`P(${v} > ${f(c.a)}) = P\\left(Z > \\dfrac{${f(c.a)}-${f(centro)}}{${f(ee, 5)}}\\right) = 1 - P(Z < ${f(zz)}) ${prob(p)}`];
+      lineas = [`P(${v} > ${dv(c.a)}) = P\\left(Z > \\dfrac{${dv(c.a)}-${f(centro)}}{${f(ee, 5)}}\\right) = 1 - P(Z < ${f(zz)}) ${prob(p)}`];
     } else {
       const za = z(c.a), zb = z(c.b); p = normalCdf(zb) - normalCdf(za);
       enunciado = `P(${f(c.a)} < ${v} < ${f(c.b)})`;
-      lineas = [`P(${f(c.a)} < ${v} < ${f(c.b)}) = P(${f(za)} < Z < ${f(zb)}) = P(Z < ${f(zb)}) - P(Z < ${f(za)}) ${prob(p)}`];
+      lineas = [`P(${dv(c.a)} < ${v} < ${dv(c.b)}) = P(${f(za)} < Z < ${f(zb)}) = P(Z < ${f(zb)}) - P(Z < ${f(za)}) ${prob(p)}`];
     }
     pasos.push({ titulo: `Probabilidad ${c.etq ?? ""}`.trim(), lineas });
     const num = x => String(x).replace(".", ",");

@@ -1,6 +1,6 @@
 # Herramienta de Estadística Inferencial (web)
 
-Intervalos de confianza (Llinás Solano, Tablas C.5–C.8) a partir de enunciados en lenguaje natural.
+Intervalos de confianza (Llinás Solano, Tablas C.5–C.8), pruebas de hipótesis, correlación y regresión lineal simple a partir de enunciados en lenguaje natural.
 Un solo proyecto, dos versiones de la misma herramienta:
 
 | Versión | Archivo | Estado |
@@ -19,6 +19,10 @@ Los datos detectados son editables en la respuesta; al cambiar uno se recalcula.
 Media (z/t, con resumen o datos crudos) · proporción · diferencia de proporciones · diferencia de medias
 (independientes: Z, t combinada, Welch) · datos pareados · varianza/desviación (χ²) · cociente de varianzas (F).
 Distribuciones muestrales (probabilidades): media, proporción, diferencia de medias y de proporciones.
+**Pruebas de hipótesis** (procedimiento de las plantillas: datos → H₀/H₁ → estadístico → punto crítico → decisión → conclusión, con valor P aparte): diferencia de medias (Z, t combinada, Welch), varianza (χ²), cociente de varianzas (F) y correlación (t con ρ₀ = 0, Z de Fisher con ρ₀ ≠ 0). La dirección de H₁ y la redacción de H₀/H₁ se deducen del enunciado y se pueden editar.
+**Regresión lineal simple:** tabla x, y, x², xy; Sxx, Sxy; b₀, b₁; r y R²; ANOVA; t e intervalos de los coeficientes; predicción.
+**También:** una media (Z/t), datos pareados (t sobre las diferencias), una proporción y diferencia de proporciones (Z, con proporción combinada si H₀: p₁ = p₂) y la pendiente o el intercepto de la regresión (t con n − 2 gl, con IC como dato extra).
+**Comprensión del enunciado:** se limpia la matemática duplicada del texto pegado (`b1=3b1=3`), se leen primero las asignaciones `símbolo = valor` (`js/core/simbolos.js`), α y confianza son intercambiables y, si el enunciado pide a la vez un intervalo y contrastar, la herramienta pregunta en vez de adivinar (`js/core/interpretar.js`).
 No disponibles aún: varianza (χ²) y cociente (F) en versión de probabilidad, nivel de confianza de un intervalo dado,
 límites de tolerancia, tamaño de muestra, cotas de una cola.
 
@@ -27,7 +31,7 @@ límites de tolerancia, tamaño de muestra, cotas de una cola.
 index.html
 css/        tokens.css (variables), glass.css (componentes), app.css (layout)
 js/app.js   chat, barra lateral, historial, tema, edición de datos
-js/core/    exportar.js (PDF y Word)  dist.js (normal, t, χ², F)  ic.js (motor)  muestral.js  texto.js  roles.js  interpretar.js  resolver.js  explicador.js  grafica.js
+js/core/    hipotesis.js  regresion.js  simbolos.js  formato.js  exportar.js (PDF y Word)  dist.js (normal, t, χ², F)  ic.js (motor)  muestral.js  texto.js  roles.js  interpretar.js  resolver.js  explicador.js  grafica.js
 js/modos/   reglas.js, llm.js
 vendor/     KaTeX local (funciona sin internet)
 ontologia/  catalogo.json (borrador inicial; el conocimiento vigente está en roles.js)
@@ -43,6 +47,7 @@ Pruebas: `node tests/run.js` (añade `--v` para ver los aciertos o `--id=ej35` p
 2. [x] Gráficas en panel lateral (estilo Python/matplotlib y R, cada una con su paleta) y script equivalente
 2. [x] Descargar cada chat en PDF (impresión del navegador) o Word (.docx) con fórmulas y gráficas
 2. [x] Intérprete por reglas, datos editables, preguntas aclaratorias, explicación con KaTeX
+3. [x] Pruebas de hipótesis (diferencia de medias, varianza, cociente), correlación y regresión lineal simple; PDF en blanco y negro con los datos del problema en rojo
 3. [x] Distribuciones muestrales de x̄, p̂, x̄₁−x̄₂ y p̂₁−p̂₂ (falta s² y el cociente)
 4. [ ] Incisos «sin calcular» (¿mayor, menor o igual longitud?), nivel de confianza de un intervalo dado
 5. [ ] Conectar el modo IA (proxy gratuito / WebLLM)

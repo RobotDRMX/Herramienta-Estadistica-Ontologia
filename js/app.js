@@ -17,7 +17,18 @@ const EJEMPLOS = [
   "De una muestra aleatoria de 140 estudiantes de una universidad, 74 indicaron que provienen de estratos altos. Construya un intervalo del 90% de confianza para estimar la proporción de estudiantes que provienen de estratos altos.",
   "Se tomó una muestra aleatoria de nueve puertas con media de 187,9 cm. Se sabe que la longitud sigue una distribución normal con una desviación típica de 32,4 cm. Calcule un intervalo de confianza del 80% para la longitud media.",
   "Calcule un intervalo de confianza del 90% para la diferencia entre las proporciones: 24 de 100 estudiantes de la universidad A y 36 de 120 de la universidad B planean especializarse en el exterior.",
-  "Una muestra de 12 bolsas de azúcar produjo estos pesos netos (libras): 12,1 12,1 11,8 11,9 11,8 12,0 12,3 11,8 12,0 11,9 12,2 11,6. Construya un intervalo del 95% de confianza para la varianza, suponiendo que se distribuyen normalmente."
+  "Una muestra de 12 bolsas de azúcar produjo estos pesos netos (libras): 12,1 12,1 11,8 11,9 11,8 12,0 12,3 11,8 12,0 11,9 12,2 11,6. Construya un intervalo del 95% de confianza para la varianza, suponiendo que se distribuyen normalmente.",
+  // pruebas de hipótesis, correlación y regresión
+  "Una muestra de 25 estudiantes del grupo 1 tiene una media de 78 y otra de 15 estudiantes del grupo 2 tiene una media de 85. Las poblaciones son normales con σ₁ = 9 y σ₂ = 5. Con un nivel de significancia del 5 %, determine si es posible concluir que la media del grupo 1 es inferior a la del grupo 2.",
+  "La varianza en el porcentaje de impurezas de las remesas de un producto químico no supera el 4 %. Una muestra aleatoria de 20 remesas dio una varianza de 5,62. Al nivel de significancia del 10 %, ¿hay evidencia de que la varianza es mayor? Suponga población normal.",
+  "Se compararon dos tipos de bonos. Para 17 bonos del primer tipo la varianza muestral fue 123,35 y para 11 bonos del segundo tipo la varianza muestral fue 8,02. Al nivel del 2 %, determine si las dos varianzas poblacionales son diferentes. Asuma poblaciones normales.",
+  "Con 20 observaciones se obtuvo r = 0,733 entre el nitrógeno que entra y el porcentaje que se elimina. Al nivel de 5 %, pruebe si la correlación poblacional es mayor que 0,5.",
+  "Una empresa registró su inversión en publicidad (miles de $): 75 80 85 65 60 55 60 85 y sus ventas (millones de $): 24 18 16 15 12 10 12 28. Halle la recta de regresión y estime las ventas cuando la inversión en publicidad sea de 70.",
+  "En un estudio, 45 de 120 pacientes con el tratamiento A mejoraron y 30 de 110 con el tratamiento B mejoraron. Con un nivel de significancia del 5 %, ¿hay evidencia de que la proporción de mejoría es mayor con A que con B?",
+  "Una fábrica afirma que a lo sumo el 8 % de sus piezas son defectuosas. En una muestra de 200 piezas se hallaron 22 defectuosas. Con α = 0,05, ¿hay evidencia de que la proporción es mayor?",
+  "Una muestra de 16 baterías tiene una vida media de 48 horas con desviación estándar de 5. Con α = 0,05, ¿hay evidencia de que la vida media poblacional es menor que 50 horas?",
+  "Antes y después de un entrenamiento, 10 atletas midieron su tiempo: 12 11 13 12 14 13 12 15 13 12 y 11 10 12 11 13 12 11 13 12 11. Con α = 0,05, ¿mejoró el tiempo?",
+  "Se estimó una recta con n=12 y pendiente b1=3 con error típico 1,1. Al nivel α=0.05 pruebe si la pendiente es distinta de cero."
 ];
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -47,7 +58,7 @@ function burbuja(clase, html) {
 }
 
 function bienvenida() {
-  burbuja("msg--bot", '<p style="margin:0">Hola. Pega o escribe un ejercicio de intervalos de confianza en lenguaje natural (media, proporción, diferencia de medias o de proporciones, varianza, cociente de varianzas). Identificaré los datos, el tema, la fórmula y el procedimiento, y podrás corregir cualquier dato. Prueba con los ejemplos de la barra lateral.</p>');
+  burbuja("msg--bot", '<p style="margin:0">Hola. Pega o escribe un ejercicio en lenguaje natural: intervalos de confianza, distribuciones muestrales, pruebas de hipótesis (diferencia de medias, varianza, cociente de varianzas, correlación) o regresión lineal simple. Identificaré los datos, el tema, la fórmula y el procedimiento, y podrás corregir cualquier dato. Prueba con los ejemplos de la barra lateral.</p>');
 }
 
 function pintarBot(msg) {
@@ -76,11 +87,12 @@ function aplicarCambio(est, el) {
     const k = el.dataset.dato, v = el.value.trim();
     if (k.startsWith("crudos")) { const l = aLista(v); l.length ? (d[k] = l) : delete d[k]; }
     else if (v === "" || !Number.isFinite(Number(v))) delete d[k];
-    else d[k] = k === "confianza" ? (Number(v) > 1 ? Number(v) / 100 : Number(v)) : Number(v);
+    else d[k] = k === "confianza" || k === "alfa" ? (Number(v) > 1 ? Number(v) / 100 : Number(v)) : Number(v);
   } else if (el.dataset.opcion) {
     const k = el.dataset.opcion;
     est.opciones = est.opciones ?? {};
-    if (el.type === "checkbox") est.opciones[k] = el.checked;
+    if (el.dataset.texto !== undefined) est.opciones[k] = el.value.trim() || undefined;   // frases y nombres (texto libre)
+    else if (el.type === "checkbox") est.opciones[k] = el.checked;
     else est.opciones[k] = el.value === "" ? undefined : el.value === "true";
   } else if (el.dataset.accion === "sigma") {
     const pares = est.tipo === "ic_media" ? [["s", "sigma"]] : [["s1", "sigma1"], ["s2", "sigma2"]];
@@ -178,6 +190,18 @@ chat.addEventListener("click", e => {
     if (accion.matches("[data-agregar-consulta]")) est.consultas.push({ etq: `(${String.fromCharCode(97 + est.consultas.length)})`, op: "menor" });
     else est.consultas.splice(Number(accion.dataset.quitarConsulta), 1);
     refrescar(caja, msg);
+    return;
+  }
+  const cl = e.target.closest("[data-clase]");
+  if (cl) {
+    const caja = cl.closest(".msg--bot"), msg = caja && refs.get(caja);
+    if (msg) {
+      // la persona eligió qué se pide: se reinterpreta el mismo texto con esa clase (sin conservar el estado de la pregunta)
+      const { texto, modo } = msg.estado;
+      for (const k of Object.keys(msg.estado)) delete msg.estado[k];
+      Object.assign(msg.estado, interpretarTodo(texto ?? "", null, cl.dataset.clase), { modo });
+      refrescar(caja, msg);
+    }
     return;
   }
   const sug = e.target.closest("[data-tipo-sugerido]");

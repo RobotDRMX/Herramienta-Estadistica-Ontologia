@@ -18,6 +18,9 @@ for (const caso of banco) {
   const r = interpretar(caso.texto);
   const errores = [];
   if (r.tipo !== caso.tipo) errores.push(`tipo: obtuve ${r.tipo}, esperaba ${caso.tipo}`);
+  if (caso.pregunta && !r.preguntaClase) errores.push("esperaba una pregunta de aclaración (¿intervalo o prueba?)");
+  // una prueba de hipótesis nunca debe terminar como intervalo de confianza
+  if (caso.tipo?.startsWith("ph_") && r.tipo?.startsWith("ic_")) errores.push("una prueba de hipótesis cayó en un intervalo de confianza");
   for (const [k, v] of Object.entries(caso.datos)) {
     if (!(k in r.datos)) errores.push(`falta ${k} (esperaba ${JSON.stringify(v)})`);
     else if (!igual(r.datos[k], v)) errores.push(`${k}: obtuve ${JSON.stringify(r.datos[k])}, esperaba ${JSON.stringify(v)}`);
@@ -34,6 +37,21 @@ for (const caso of banco) {
     const s = resolver(r.tipo, r.datos, r.opciones, r.consultas);
     if (!s.ok) errores.push(`motor: ${s.error}`);
     else caso.probs.forEach((p, i) => { const g = s.resultado.resultados[i]?.prob; if (g === undefined || Math.abs(g - p) > 0.002) errores.push(`prob ${i + 1}: obtuve ${g?.toFixed(4)}, esperaba ${p}`); });
+  }
+  if (caso.prueba && !errores.length) {
+    const s = resolver(r.tipo, r.datos, r.opciones);
+    if (!s.ok) errores.push(`motor: ${s.error}`);
+    else {
+      const p = s.resultado.prueba, c = caso.prueba;
+      if (Math.abs(p.estadistico.valor - c.est) > 1e-3 * Math.max(1, Math.abs(c.est))) errores.push(`estadístico: obtuve ${p.estadistico.valor.toFixed(4)}, esperaba ${c.est}`);
+      if (c.criticos && (p.criticos.length !== c.criticos.length || p.criticos.some((v, i) => Math.abs(v - c.criticos[i]) > 2e-3))) errores.push(`críticos: obtuve ${p.criticos.map(v => v.toFixed(4))}, esperaba ${c.criticos}`);
+      if (p.rechaza !== c.rechaza) errores.push(`decisión: obtuve ${p.rechaza ? "rechaza" : "no rechaza"}, esperaba ${c.rechaza ? "rechaza" : "no rechaza"}`);
+    }
+  }
+  if (caso.regresion && !errores.length) {
+    const s = resolver(r.tipo, r.datos, r.opciones);
+    if (!s.ok) errores.push(`motor: ${s.error}`);
+    else for (const [k, v] of Object.entries(caso.regresion)) if (Math.abs(s.resultado.extra[k] - v) > 1e-3 * Math.max(1, Math.abs(v))) errores.push(`regresión ${k}: obtuve ${s.resultado.extra[k]}, esperaba ${v}`);
   }
   if (caso.intervalo && !errores.length) {
     const s = resolver(r.tipo, r.datos, r.opciones);

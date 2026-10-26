@@ -2,13 +2,21 @@
 import { resolver } from "./resolver.js";
 import { TIPOS, ETIQUETAS, faltantes } from "./roles.js";
 import { TIPOS_DM } from "./muestral.js";
+import { TIPOS_PH, ETIQ_PH, faltantesPH, frasesHipotesis } from "./hipotesis.js";
+import { TIPOS_RL, ETIQ_RL, faltantesRL } from "./regresion.js";
 import { interpretarTodo } from "./interpretar.js";
+import { MACRO_DATO } from "./formato.js";
 
-const TODOS_LOS_TIPOS = { ...TIPOS, ...TIPOS_DM };
+const TODOS_LOS_TIPOS = { ...TIPOS, ...TIPOS_DM, ...TIPOS_PH, ...TIPOS_RL };
 export const ETIQ_DM = {
   mu: "μ (media poblacional)", sigma: "σ (desv. poblacional)", p: "p (proporción poblacional)", n: "n (tamaño de muestra)",
   mu1: "μ₁", mu2: "μ₂", sigma1: "σ₁", sigma2: "σ₂", p1: "p₁ (poblacional)", p2: "p₂ (poblacional)", n1: "n₁", n2: "n₂"
 };
+/** Etiquetas de los tipos que no son intervalos (distribuciones muestrales, pruebas, regresión). */
+export const ETIQ_NUEVAS = { ...ETIQ_DM, ...ETIQ_PH, ...ETIQ_RL };
+const esIC = tipo => tipo.startsWith("ic_");
+const esPH = tipo => tipo.startsWith("ph_");
+const esRL = tipo => tipo.startsWith("rl_");
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
@@ -24,14 +32,24 @@ const ESENCIALES = {
   dm_media: ["mu", "sigma", "n"],
   dm_proporcion: ["p", "n"],
   dm_dif_medias: ["mu1", "mu2", "sigma1", "sigma2", "n1", "n2"],
-  dm_dif_proporciones: ["p1", "p2", "n1", "n2"]
+  dm_dif_proporciones: ["p1", "p2", "n1", "n2"],
+  ph_dif_medias: ["alfa", "n1", "x1", "s1", "n2", "x2", "s2", "d0"],
+  ph_varianza: ["alfa", "sigma0sq", "n", "s"],
+  ph_cociente: ["alfa", "n1", "s1sq", "n2", "s2sq"],
+  ph_correlacion: ["alfa", "rho0", "n", "r"],
+  ph_proporcion: ["alfa", "p0", "n", "x"],
+  ph_dif_proporciones: ["alfa", "n1", "x1", "n2", "x2", "d0"],
+  ph_media: ["alfa", "mu0", "n", "xbar", "s"],
+  ph_pareadas: ["alfa", "n", "dbar", "sd", "d0"],
+  ph_pendiente: ["alfa", "n", "b1", "seb1", "beta10"],
+  rl_simple: ["crudosx", "crudosy"]
 };
-const ORDEN = ["mu", "confianza", "n", "xbar", "s", "sigma", "x", "p", "s2", "dbar", "sd", "n1", "x1", "p1", "s1", "sigma1", "s1sq", "n2", "x2", "p2", "s2", "sigma2", "s2sq"];
+const ORDEN = ["mu", "confianza", "alfa", "sigma0sq", "rho0", "d0", "r", "crudosx", "crudosy", "x0", "ssq", "n", "xbar", "s", "sigma", "x", "p", "s2", "dbar", "sd", "n1", "x1", "p1", "s1", "sigma1", "s1sq", "n2", "x2", "p2", "s2", "sigma2", "s2sq"];
 
 /* ---------- TeX ---------- */
 export function tex(t, display = true) {
   try {
-    if (window.katex) return window.katex.renderToString(t, { displayMode: display, throwOnError: false, strict: "ignore" });
+    if (window.katex) return window.katex.renderToString(t, { displayMode: display, throwOnError: false, strict: "ignore", macros: { ...MACRO_DATO } });
   } catch (e) { /* cae al texto plano */ }
   return `<code>${esc(t)}</code>`;
 }
@@ -39,16 +57,25 @@ export function tex(t, display = true) {
 const coma = s => String(s).replace(/(\d)\.(\d)/g, "$1,$2");
 
 /* ---------- editor de datos ---------- */
-let esDM = false;
+let usaNuevas = false;   // los tipos que no son intervalos traen sus propias etiquetas
+const etiquetaCampo = sim => (usaNuevas ? ETIQ_NUEVAS[sim] : null) ?? ETIQUETAS[sim] ?? sim;
+const OPCIONALES = new Set(["d0", "rho0", "x0", "beta10", "beta00"]);
 function campo(sim, valor, faltaDato) {
-  if (Array.isArray(valor)) {
-    return `<label class="campo campo--lista"><span>${esc(ETIQUETAS[sim] ?? sim)}</span>
-      <textarea data-dato="${sim}" rows="2">${esc(valor.join(", "))}</textarea></label>`;
+  if (Array.isArray(valor) || sim.startsWith("crudos")) {
+    return `<label class="campo campo--lista ${faltaDato ? "campo--falta" : ""}"><span>${esc(etiquetaCampo(sim))}</span>
+      <textarea data-dato="${sim}" rows="2" placeholder="Pega los datos separados por espacios o comas">${esc((valor ?? []).join(", "))}</textarea></label>`;
   }
-  const v = sim === "confianza" && valor !== undefined ? Math.round(valor * 10000) / 100 : valor;
-  return `<label class="campo ${faltaDato ? "campo--falta" : ""}"><span>${esc((esDM ? ETIQ_DM[sim] : null) ?? ETIQUETAS[sim] ?? sim)}${sim === "confianza" ? " en %" : ""}</span>
-    <input data-dato="${sim}" type="number" step="any" inputmode="decimal" value="${v ?? ""}" placeholder="—"></label>`;
+  const pct = sim === "confianza" || sim === "alfa";
+  const v = pct && valor !== undefined ? Math.round(valor * 10000) / 100 : valor;
+  return `<label class="campo ${faltaDato ? "campo--falta" : ""}"><span>${esc(etiquetaCampo(sim))}${pct ? " en %" : ""}</span>
+    <input data-dato="${sim}" type="number" step="any" inputmode="decimal" value="${v ?? ""}" placeholder="${["d0", "rho0", "beta10", "beta00"].includes(sim) ? "0" : "—"}"></label>`;
 }
+
+/** Campo de texto libre guardado en las opciones (frases de las hipótesis, nombres de las variables). */
+const campoTexto = (clave, etiqueta, valor, sugerido) => `<label class="campo campo--lista"><span>${esc(etiqueta)}</span>
+  <input type="text" data-opcion="${clave}" data-texto value="${esc(valor ?? "")}" placeholder="${esc(sugerido ?? "")}"></label>`;
+
+const faltantesDe = (tipo, d) => (esPH(tipo) ? faltantesPH(tipo, d) : esRL(tipo) ? faltantesRL(d) : tipo.startsWith("dm_") ? ESENCIALES[tipo].filter(k => d[k] === undefined) : faltantes(tipo, d));
 
 function editorConsultas(estado) {
   const filas = (estado.consultas ?? []).map((c, i) => `<div class="consulta">
@@ -63,19 +90,35 @@ function editorConsultas(estado) {
 
 function editor(estado) {
   const { tipo, datos } = estado;
-  esDM = tipo.startsWith("dm_");
+  const esDM = tipo.startsWith("dm_");
+  usaNuevas = !esIC(tipo);
   const claves = [...new Set([...ESENCIALES[tipo], ...Object.keys(datos)])];
   claves.sort((a, b) => (ORDEN.indexOf(a) + 100 * (ORDEN.indexOf(a) < 0)) - (ORDEN.indexOf(b) + 100 * (ORDEN.indexOf(b) < 0)));
-  const faltan = new Set(esDM ? ESENCIALES[tipo].filter(k => datos[k] === undefined) : faltantes(tipo, datos));
-  const campos = claves.map(k => campo(k, datos[k], faltan.has(k) || datos[k] === undefined && ESENCIALES[tipo].includes(k))).join("");
+  const faltan = new Set(faltantesDe(tipo, datos));
+  // intervalos y probabilidades marcan todo campo esencial vacío; pruebas y regresión, solo lo realmente necesario
+  const marcado = k => faltan.has(k) || (!esPH(tipo) && !esRL(tipo) && datos[k] === undefined && ESENCIALES[tipo].includes(k) && !OPCIONALES.has(k));
+  const campos = claves.map(k => campo(k, datos[k], marcado(k))).join("");
 
   const o = estado.opciones ?? {};
-  let opciones = tipo.endsWith("proporcion") || tipo.endsWith("proporciones") ? "" : `<label class="check"><input type="checkbox" data-opcion="normal" ${o.normal ? "checked" : ""}> Población normal</label>`;
+  let opciones = tipo.endsWith("proporcion") || tipo.endsWith("proporciones") || esPH(tipo) || esRL(tipo) ? "" : `<label class="check"><input type="checkbox" data-opcion="normal" ${o.normal ? "checked" : ""}> Población normal</label>`;
   if (tipo === "ic_media" || tipo === "ic_dif_medias") {
     const enSigma = tipo === "ic_media" ? datos.sigma !== undefined : datos.sigma1 !== undefined;
     opciones += `<label class="check"><input type="checkbox" data-accion="sigma" ${enSigma ? "checked" : ""}> La desviación es poblacional (σ conocida)</label>`;
   }
-  if (tipo === "ic_dif_medias") {
+  if (esPH(tipo)) {
+    const sel = v => (o.cola ?? "dos") === v ? "selected" : "";
+    opciones += `<label class="selector">Hipótesis alternativa (H₁)
+      <select data-opcion="cola" data-texto><option value="dos" ${sel("dos")}>≠ (dos colas)</option><option value="der" ${sel("der")}>&gt; (cola a la derecha)</option><option value="izq" ${sel("izq")}>&lt; (cola a la izquierda)</option></select></label>`;
+    const auto = frasesHipotesis(tipo, datos, { ...o, contextoH0: undefined, contextoH1: undefined });
+    opciones += `<details class="plegable plegable--hip"><summary>Redacción de las hipótesis</summary>
+      ${tipo === "ph_varianza" || tipo === "ph_correlacion" ? campoTexto("sujeto", tipo === "ph_varianza" ? "Sobre qué es la varianza" : "Entre qué variables", o.sujeto, tipo === "ph_varianza" ? "la varianza poblacional" : "las dos variables") : ""}
+      ${campoTexto("contextoH0", "H₀ en palabras (opcional)", o.contextoH0, auto.h0)}
+      ${campoTexto("contextoH1", "H₁ en palabras (opcional)", o.contextoH1, auto.h1)}</details>`;
+  }
+  if (esRL(tipo)) {
+    opciones += `<div class="campos">${campoTexto("nombreX", "Nombre de x", o.nombreX, "x")}${campoTexto("nombreY", "Nombre de y", o.nombreY, "y")}</div>`;
+  }
+  if (tipo === "ic_dif_medias" || tipo === "ph_dif_medias") {
     opciones += `<label class="selector">Varianzas
       <select data-opcion="varianzasIguales"><option value="">¿?</option><option value="true" ${o.varianzasIguales === true ? "selected" : ""}>iguales</option><option value="false" ${o.varianzasIguales === false ? "selected" : ""}>distintas</option></select></label>`;
   }
@@ -91,10 +134,14 @@ function editor(estado) {
 }
 
 /* ---------- solución ---------- */
+export function tablaHtml(t) {
+  return `<div class="tabla-wrap"><table class="tabla-paso"><thead><tr>${t.cab.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${t.filas.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+
 function pasoHtml(p, i) {
   const lineas = (p.lineas ?? []).map(l => `<div class="tex">${tex(l)}</div>`).join("");
   const texto = p.texto ? `<p class="paso__txt">${esc(p.texto)}</p>` : "";
-  return `<li class="paso"><b>${esc(p.titulo)}</b>${texto}${lineas}</li>`;
+  return `<li class="paso"><b>${esc(p.titulo)}</b>${texto}${p.tabla ? tablaHtml(p.tabla) : ""}${lineas}</li>`;
 }
 
 function solucionHtml(r) {
@@ -129,7 +176,7 @@ function alternativas(estado) {
     if (k === estado.tipo) continue;
     try {
       const e = interpretarTodo(estado.texto, k);
-      const completo = k.startsWith("dm_") ? ESENCIALES[k].every(x => e.datos[x] !== undefined) && e.consultas?.length : faltantes(k, e.datos).length === 0;
+      const completo = k.startsWith("dm_") ? ESENCIALES[k].every(x => e.datos[x] !== undefined) && e.consultas?.length : faltantesDe(k, e.datos).length === 0;
       if (completo) buenos.push(k);
     } catch (err) { /* ese tipo no aplica */ }
   }
@@ -139,7 +186,9 @@ function alternativas(estado) {
 /** HTML completo de la respuesta del asistente. */
 export function renderEstado(estado) {
   if (!estado.soportado) {
-    return `<p class="aviso">${(estado.notas ?? []).map(esc).join("<br>")}</p>`;
+    const pq = estado.preguntaClase;
+    const botones = pq ? `<div class="pregunta"><p>${esc(pq.texto)}</p>${pq.opciones.map(o => `<button class="btn" type="button" data-clase="${o.clase}">${esc(o.etiqueta)}</button>`).join(" ")}</div>` : "";
+    return `<p class="aviso">${(estado.notas ?? []).map(esc).join("<br>")}</p>${botones}`;
   }
   const evid = estado.evidencias?.length
     ? `<div class="evidencias">${estado.evidencias.map(e => `<span class="dato" title="${esc(e.frase)}"><b>${esc(ETIQUETAS[e.simbolo]?.split(" ")[0] ?? e.simbolo)}</b> ${esc(e.texto)}</span>`).join("")}</div>`

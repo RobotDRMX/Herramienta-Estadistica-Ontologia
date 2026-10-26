@@ -1,0 +1,7 @@
+# Desarrollo local con XAMPP: el navegador revalida siempre los archivos de la app.
+# Evita que mezcle módulos JS viejos (en caché) con nuevos, lo que deja la página sin funcionar.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|css|json)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>

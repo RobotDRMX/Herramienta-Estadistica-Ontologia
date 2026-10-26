@@ -4,7 +4,8 @@
 import { resolver } from "./resolver.js";
 import { figuras } from "./grafica.js";
 import { ETIQUETAS } from "./roles.js";
-import { ETIQ_DM } from "./explicador.js";
+import { ETIQ_NUEVAS } from "./explicador.js";
+import { MACRO_DATO } from "./formato.js";
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const coma = s => String(s).replace(/(\d)\.(\d)/g, "$1,$2");
@@ -13,11 +14,11 @@ const fmt = v => (typeof v === "number" ? String(Math.round(v * 1e6) / 1e6).repl
 /* ------------------------------------------------------------------ */
 /* 1. Contenido: lista de bloques                                      */
 /* ------------------------------------------------------------------ */
-function etiqueta(sim) { return ETIQ_DM[sim] ?? ETIQUETAS[sim] ?? sim; }
+function etiqueta(sim) { return ETIQ_NUEVAS[sim] ?? ETIQUETAS[sim] ?? sim; }
 
 function valorTxt(sim, v) {
   if (Array.isArray(v)) return `${v.length} datos: ${v.map(fmt).join("; ")}`;
-  if (sim === "confianza") return `${fmt(Math.round(v * 10000) / 100)} %`;
+  if (sim === "confianza" || sim === "alfa") return `${fmt(Math.round(v * 10000) / 100)} %`;
   return fmt(v);
 }
 
@@ -50,6 +51,7 @@ export function bloques(chat) {
     r.pasos.forEach((p, k) => {
       B.push({ t: "paso", text: `${k + 1}. ${p.titulo}` });
       if (p.texto) B.push({ t: "p", text: p.texto });
+      if (p.tabla) B.push({ t: "tabla", cab: p.tabla.cab, filas: p.tabla.filas });
       for (const l of p.lineas ?? []) B.push({ t: "tex", tex: l });
     });
     B.push({ t: "h2", text: "Resultado" });
@@ -74,30 +76,35 @@ export function bloques(chat) {
 /* ------------------------------------------------------------------ */
 /* 2. PDF: impresión del navegador                                     */
 /* ------------------------------------------------------------------ */
+// PDF: todo en negro; negrita solo en títulos y subtítulos. Las variables de los datos van en rojo dentro de las fórmulas (macro \dato, ver formato.js).
 const CSS_IMPRESION = `
   @page { size: A4; margin: 16mm 15mm; }
   * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body { font: 11pt/1.45 "Segoe UI", Calibri, Arial, sans-serif; color: #111; margin: 0; }
-  h1.titulo { font-size: 22pt; margin: 0; color: #0b5cd5; }
-  .sub { font-size: 13pt; margin: 4pt 0 0; color: #333; }
-  .meta { font-size: 9pt; color: #666; margin: 2pt 0 12pt; border-bottom: 2px solid #0b5cd5; padding-bottom: 8pt; }
-  h2.h1 { font-size: 15pt; margin: 18pt 0 4pt; padding: 4pt 8pt; background: #eaf1ff; border-left: 4px solid #0b5cd5; break-after: avoid; }
-  .enun { margin: 6pt 0; padding: 8pt 10pt; background: #f5f7fa; border-radius: 6pt; }
-  h3.h2 { font-size: 12pt; margin: 12pt 0 4pt; color: #0b5cd5; break-after: avoid; }
-  .paso { font-weight: 600; margin: 8pt 0 2pt; break-after: avoid; }
+  body { font: 11pt/1.45 "Segoe UI", Calibri, Arial, sans-serif; color: #000; margin: 0; font-weight: 400; }
+  h1.titulo { font-size: 22pt; margin: 0; font-weight: 700; }
+  .sub { font-size: 13pt; margin: 4pt 0 0; font-weight: 700; }
+  .meta { font-size: 9pt; margin: 2pt 0 12pt; border-bottom: 1.5px solid #000; padding-bottom: 8pt; }
+  h2.h1 { font-size: 15pt; font-weight: 700; margin: 18pt 0 4pt; padding: 0 0 3pt; border-bottom: 1px solid #000; break-after: avoid; }
+  .enun { margin: 6pt 0; padding: 2pt 0 2pt 10pt; border-left: 2px solid #000; }
+  h3.h2 { font-size: 12pt; font-weight: 700; margin: 12pt 0 4pt; break-after: avoid; }
+  .paso { font-weight: 700; margin: 8pt 0 2pt; break-after: avoid; }
   .tex { text-align: center; margin: 3pt 0; overflow: hidden; }
   .tex .katex-display { margin: 2pt 0; }
   ul { margin: 2pt 0 2pt 16pt; padding: 0; } li { margin: 1pt 0; }
-  .nota { font-size: 9.5pt; color: #555; margin: 3pt 0; }
-  .concl { margin: 6pt 0; padding: 8pt 10pt; border: 1.5px solid #0b5cd5; border-radius: 6pt; background: #f4f8ff; }
+  .nota { font-size: 9.5pt; margin: 3pt 0; }
+  .concl { margin: 6pt 0; padding: 6pt 10pt; border: 1px solid #000; }
+  table.tabla { border-collapse: collapse; margin: 4pt auto; font-size: 9.5pt; break-inside: avoid; }
+  table.tabla th, table.tabla td { border: 1px solid #000; padding: 2pt 7pt; text-align: right; }
+  table.tabla th { font-weight: 700; }
+  table.tabla th:first-child, table.tabla td:first-child { text-align: left; }
   figure { margin: 8pt 0; break-inside: avoid; text-align: center; }
-  figure svg { width: 100%; max-width: 150mm; height: auto; border: 1px solid #ddd; }
-  figcaption { font-size: 9pt; color: #555; margin-top: 2pt; }
+  figure svg { width: 100%; max-width: 150mm; height: auto; border: 1px solid #000; }
+  figcaption { font-size: 9pt; margin-top: 2pt; }
 `;
 
 export function htmlDocumento(chat, baseUrl) {
   const k = window.katex;
-  const tex = t => { try { return k.renderToString(t, { displayMode: true, throwOnError: false, strict: "ignore" }); } catch (e) { return `<code>${esc(t)}</code>`; } };
+  const tex = t => { try { return k.renderToString(t, { displayMode: true, throwOnError: false, strict: "ignore", macros: { "\\dato": "\\textcolor{##c00000}{#1}" } }); } catch (e) { return `<code>${esc(t)}</code>`; } };
   const cuerpo = bloques(chat).map(b => {
     switch (b.t) {
       case "titulo": return `<h1 class="titulo">${esc(b.text)}</h1>`;
@@ -109,6 +116,7 @@ export function htmlDocumento(chat, baseUrl) {
       case "p": return `<p>${esc(b.text)}</p>`;
       case "paso": return `<div class="paso">${esc(b.text)}</div>`;
       case "tex": return `<div class="tex">${tex(b.tex)}</div>`;
+      case "tabla": return `<table class="tabla"><thead><tr>${b.cab.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${b.filas.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
       case "lista": return `<ul>${b.items.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
       case "nota": return `<p class="nota">ⓘ ${esc(b.text)}</p>`;
       case "concl": return `<div class="concl">${esc(b.text)}</div>`;
@@ -225,7 +233,7 @@ export async function texAPng(tex) {
   const FS = 22;
   const caja = document.createElement("div");
   caja.style.cssText = `position:fixed;left:-9999px;top:0;font-size:${FS}px;line-height:1.2;white-space:nowrap;padding:4px 6px;background:#fff;color:#000`;
-  caja.innerHTML = window.katex.renderToString(tex, { displayMode: false, throwOnError: false, strict: "ignore", output: "html" });
+  caja.innerHTML = window.katex.renderToString(tex, { displayMode: false, throwOnError: false, strict: "ignore", output: "html", macros: { ...MACRO_DATO } });
   document.body.appendChild(caja);
   const r = caja.getBoundingClientRect();
   const w = Math.ceil(r.width), h = Math.ceil(r.height);
@@ -245,6 +253,13 @@ const x = s => String(s).replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">
 
 const run = (t, o = {}) => `<w:r><w:rPr>${o.b ? "<w:b/>" : ""}${o.i ? "<w:i/>" : ""}${o.color ? `<w:color w:val="${o.color}"/>` : ""}${o.sz ? `<w:sz w:val="${o.sz}"/>` : ""}</w:rPr><w:t xml:space="preserve">${x(t)}</w:t></w:r>`;
 const parrafo = (inner, o = {}) => `<w:p><w:pPr>${o.estilo ? `<w:pStyle w:val="${o.estilo}"/>` : ""}${o.keep ? "<w:keepNext/>" : ""}${o.shd ? `<w:shd w:val="clear" w:color="auto" w:fill="${o.shd}"/>` : ""}${o.borde ? `<w:pBdr><w:left w:val="single" w:sz="18" w:space="6" w:color="${o.borde}"/></w:pBdr>` : ""}<w:spacing w:before="${o.antes ?? 0}" w:after="${o.despues ?? 80}"/>${o.centro ? '<w:jc w:val="center"/>' : ""}</w:pPr>${inner}</w:p>`;
+
+const tablaDocx = t => {
+  const bordes = ["top", "left", "bottom", "right", "insideH", "insideV"].map(l => `<w:${l} w:val="single" w:sz="4" w:space="0" w:color="999999"/>`).join("");
+  const celda = (c, i, cab) => `<w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/></w:tcPr><w:p><w:pPr><w:spacing w:before="20" w:after="20"/><w:jc w:val="${i === 0 ? "left" : "right"}"/></w:pPr>${run(c, { b: cab, sz: 19 })}</w:p></w:tc>`;
+  const fila = (cols, cab) => `<w:tr>${cols.map((c, i) => celda(c, i, cab)).join("")}</w:tr>`;
+  return `<w:tbl><w:tblPr><w:tblW w:w="0" w:type="auto"/><w:jc w:val="center"/><w:tblBorders>${bordes}</w:tblBorders><w:tblCellMar><w:left w:w="80" w:type="dxa"/><w:right w:w="80" w:type="dxa"/></w:tblCellMar></w:tblPr>${fila(t.cab, true)}${t.filas.map(r => fila(r, false)).join("")}</w:tbl>${parrafo("", { despues: 60 })}`;
+};
 
 let idImg = 0;
 function imagen(rid, cx, cy, nombre) {
@@ -281,6 +296,7 @@ export async function crearDocx(chat, alProgreso = () => {}) {
       case "enun": partes.push(parrafo(run(b.text), { shd: "F2F5FA", borde: "0B5CD5", despues: 120 })); break;
       case "p": partes.push(parrafo(run(b.text))); break;
       case "paso": partes.push(parrafo(run(b.text, { b: true }), { keep: true, antes: 100, despues: 20 })); break;
+      case "tabla": partes.push(tablaDocx(b)); break;
       case "lista": for (const it of b.items) partes.push(parrafo(run("•  " + it), { despues: 20 })); break;
       case "nota": partes.push(parrafo(run("ⓘ " + b.text, { i: true, color: "555555", sz: 19 }))); break;
       case "concl": partes.push(parrafo(run(b.text, { b: true }), { shd: "EAF1FF", borde: "0B5CD5", antes: 80, despues: 140 })); break;

@@ -105,6 +105,20 @@ export function asignar(n, toks, cues, ventana = 55) {
   return salida;
 }
 
+/**
+ * Limpia el texto pegado desde páginas con fórmulas (KaTeX/MathJax/Word), que traen la matemática duplicada:
+ * «b1=3b1=3» → «b1=3», «α=0.05α=0.05» → «α=0.05», «5%5%» → «5%». También unifica el signo menos y los espacios raros.
+ * Se aplica una sola vez, antes de interpretar (no conserva la longitud del texto).
+ */
+export function limpiarEntrada(txt) {
+  return String(txt)
+    .replace(/[​‌‍⁠﻿]/g, "")
+    .replace(/[   ]/g, " ")
+    .replace(/−/g, "-")
+    .replace(/(\S+?[=<>≤≥]\S+?)\1/g, "$1")
+    .replace(/(\d+(?:[.,]\d+)?\s*%)\1/g, "$1");
+}
+
 /** Busca todas las coincidencias de una regex como pistas con un rol. */
 export function pistas(n, re, rol, extra = {}) {
   const out = [];

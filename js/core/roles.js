@@ -2,6 +2,7 @@
 // 100 % determinista (sin IA). El modo "Con IA" puede refinar este resultado, pero nunca calcula.
 
 import { normalizar, tokenizar, detectarListas, hayCorte, pistas } from "./texto.js";
+import { extraerAsignaciones } from "./simbolos.js";
 
 export const TIPOS = {
   ic_media: "IC para la media",
@@ -14,7 +15,8 @@ export const TIPOS = {
 };
 
 /* Datos que faltan para poder resolver, por tipo. Devuelve la lista de símbolos pendientes. */
-const falta = (d, ...ks) => ks.filter(k => d[k] === undefined || Number.isNaN(d[k]));
+// «confianza» se da por cubierta si el enunciado trae α (confianza = 1 − α)
+const falta = (d, ...ks) => ks.filter(k => (k === "confianza" ? d.confianza === undefined && d.alfa === undefined : d[k] === undefined || Number.isNaN(d[k])));
 const unaDe = (d, ...ks) => (ks.some(k => d[k] !== undefined) ? [] : [ks[0]]);
 
 const REQUERIDOS = {
@@ -80,8 +82,9 @@ function extraerConfianza(n, toks, notas) {
   // α / nivel de significancia
   for (const t of toks) {
     if (t.palabra || t.lista) continue;
-    const antes = n.slice(Math.max(0, t.ini - 30), t.ini);
-    if (/(significancia|significacion|alfa|α|riesgo de error|error tipo i)\s*(?:de|del|es|=|:)?\s*(?:de\s+)?$/.test(antes)) {
+    const antes = n.slice(Math.max(0, t.ini - 30), t.ini), despues = n.slice(t.fin, t.fin + 40);
+    // «α = 0,05», «nivel de significancia del 5 %», «al nivel del 5 %», «5 % de significancia»
+    if (/(significancia|significacion|alfa|α|riesgo de error|error tipo i|\bnivel)\s*(?:de|del|es|=|:)?\s*(?:de\s+)?$/.test(antes) || /^\s*(?:de\s+)?(?:nivel\s+de\s+)?(?:significancia|significacion)/.test(despues)) {
       const a = t.pct ? t.valor / 100 : t.valor;
       if (a > 0 && a < 0.5) { t.uso = "alfa"; return { valor: 1 - a, tok: t, deAlfa: true }; }
     }
@@ -152,7 +155,11 @@ function pistasGenerales(n) {
 /** Asignación por cercanía; si la oración dice "respectivamente", en orden de aparición. */
 function asignarPistas(n, toks, cues) {
   const cs = [...cues].sort((a, b) => a.ini - b.ini).map(c => ({ ...c, usada: false }));
-  const out = [];
+  // «en 40 observaciones»: el número pegado a un sustantivo de conteo es n, aunque antes aparezca «la media»
+  const out = toks.filter(t => t.nCuenta && !t.uso && !t.lista).map(t => {
+    t.uso = "n";
+    return { rol: "n", grupo: null, tok: t, cue: { rol: "n", ini: t.ini, fin: t.fin, grupo: null } };
+  });
   for (const t of toks) {
     if (t.uso || t.lista) continue;
     const resp = /respectivamente/.test(n.slice(t.fin, t.fin + 70)) && !hayCorte(n, t.fin, t.fin + n.slice(t.fin, t.fin + 70).indexOf("respectivamente"));
@@ -420,6 +427,19 @@ export function interpretar(textoOriginal, forzarTipo = null) {
   for (const m of n.matchAll(/escala[^.]{0,25}?(\d+(?:[.,]\d+)?)\s*(?:a|hasta|-)\s*(\d+(?:[.,]\d+)?)/g)) {
     const fin = m.index + m[0].length;
     toks.filter(t => t.ini >= m.index && t.fin <= fin).forEach(t => (t.uso = "escala"));
+  }
+
+  for (const m of n.matchAll(/(\d+)\s+(?:observaciones|datos|mediciones|registros|lecturas|pares|elementos)\b/g)) {
+    const t = toks.find(t => t.ini === m.index && t.entero && !t.pct && !t.lista);
+    if (t) t.nCuenta = true;
+  }
+
+  // «b1=3», «r=0,52», «ρ0=0,5»…: valores que no son datos de este tipo de problema; se apartan para que
+  // las pistas por palabra clave no los tomen (p. ej. «b1=3» como «3 éxitos»)
+  for (const a of extraerAsignaciones(n).lista) {
+    if (!["b0", "b1", "beta0", "beta1", "r", "rho0", "p0", "d0", "mu0"].includes(a.clave)) continue;
+    const t = toks.find(t => t.ini >= a.vini && t.fin <= a.vfin + 1);
+    if (t && !t.uso) t.uso = "simbolo";
   }
 
   const conf = extraerConfianza(n, toks, notas);
